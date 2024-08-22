@@ -6,39 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>To-do List App</title>
     <link rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="script.js"></script>
+    <script src="script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
   </head>
+
   <body>
+    <div id="grid-container">
+      <header>
+        <nav>
+          <ul class="nav-container">
+            <li><img class="logo" src="./images/Logo.svg" alt="Logo"><span class="delta">Delta</span></li>
+            <li>Date<span id="date"></span></li>
+            <li><span id="time"></span></li>
+          </ul>
+        </nav>
+      </header>
+
+      <div class="grid-item side-pane">Side pane</div>
+      <div class="grid-item left">Create task</div>
+      <div class="grid-item right">View tasks</div>
+
+      <div class="grid-item green-container">
+        <img src="./images/Green-diffuse-circle.svg" alt="green diffuse circle" id="green-circle">
+      </div>
+      <div class="grid-item pink-container">
+        <img src="./images/Pink-diffuse-circle.svg" alt="pink diffuse circle" id="pink-circle">
+      </div>
+      <div class="grid-item blue-container">
+        <img src="./images/Blue-diffuse-circle.svg" alt="blue diffuse circle" id="blue-circle">
+      </div>
+      <div class="grid-item yellow-container">
+        <img src="./images/Yellow-diffuse-circle.svg" alt="yellow diffuse circle" id="yellow-circle">
+      </div>
+    </div>
   </body>
 </html>
-
-<div id="grid-container">
-  <header>
-    <nav>
-      <ul class="nav-container">
-        <li><img class="logo" src="./images/Logo.svg" alt="Logo"><span class="delta">Delta</span></li>
-        <li><span class="date-time">Date/time</span></li>
-      </ul>
-    </nav>
-  </header>
-
-  <div class="grid-item side-pane">Side pane</div>
-  <div class="grid-item left">Create task</div>
-  <div class="grid-item right">View tasks</div>
-
-  <div class="grid-item green-container">
-    <img src="./images/Green-diffuse-circle.svg" alt="green diffuse circle" id="green-circle">
-  </div>
-  <div class="grid-item pink-container">
-    <img src="./images/Pink-diffuse-circle.svg" alt="pink diffuse circle" id="pink-circle">
-  </div>
-  <div class="grid-item blue-container">
-    <img src="./images/Blue-diffuse-circle.svg" alt="blue diffuse circle" id="blue-circle">
-  </div>
-  <div class="grid-item yellow-container">
-    <img src="./images/Yellow-diffuse-circle.svg" alt="yellow diffuse circle" id="yellow-circle">
-  </div>
-</div>
