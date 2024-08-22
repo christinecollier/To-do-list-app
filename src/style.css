@@ -2,10 +2,11 @@
   box-sizing: border-box;
   margin:0;
   padding: 0;
-  color:black;
+  color: white;
   font-weight: normal;
   font-size: 16px;
   font-family: 'Manrope', sans-serif;
+  text-decoration: none;
 }
 
 html {
@@ -37,38 +38,71 @@ header {
   grid-area: 1 / 1 / span 1 / span 8;
   z-index: 1;
   background-color: #7733ff;
-  color: white;
+  color: inherit;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 3%;
+  align-items: center;
 }
 
-nav {
-  grid-area: 1 / 1 / span 10 / span 2;
+.nav-container {
+  list-style: none;
+} 
+
+.nav-container li {
+  display: inline-block;
+  align-items: center;
+  padding: 0 20px;
+} 
+
+.logo {
+  height: 17px;
+  width: auto;
 }
 
-#left {
+.logo:hover {
+  cursor: pointer;
+}
+
+.delta{
+  font-weight: 500;
+  font-size: 1.5rem;
+  padding-left: 5px;
+}
+
+.date-time{
+  margin-left: auto;
+}
+
+.side-pane {
+  grid-area: 2 / 1 / span 10 / span 2;
+}
+
+.left {
   grid-area: 2 / 3 / span 9 / span 3;
 }
 
-#right {
+.right {
   grid-area: 2 / 6 / span 9 / span 3;
 }
 
 /* Diffuse coloured circles */
-#green-container {
+.green-container {
   grid-area: 1 / 4 / span 5 / span 2;
   z-index: -1;
 }
 
-#pink-container {
+.pink-container {
   grid-area: 5 / 3 / span 5 / span 2;
   z-index: -1;
 }
 
-#blue-container {
+.blue-container {
   grid-area: 2 / 7 / span 5 / span 2;
   z-index: -1;
 }
 
-#yellow-container {
+.yellow-container {
   grid-area: 6 / 5 / span 5 / span 2;
   z-index: -1;
 }

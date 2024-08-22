@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CSS grid practice</title>
+    <title>To-do List App</title>
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,20 +16,29 @@
 </html>
 
 <div id="grid-container">
-  <header class="grid-item"><h1>Banner</h1></header>
-  <nav class="grid-item">Navpane</nav>
-  <div class="grid-item" id="left">Create task</div>
-  <div class="grid-item" id="right">View tasks</div>
-  <div class="grid-item" id="green-container">
+  <header>
+    <nav>
+      <ul class="nav-container">
+        <li><img class="logo" src="./images/Logo.svg" alt="Logo"><span class="delta">Delta</span></li>
+        <li>Date/time</li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="grid-item side-pane">Side pane</div>
+  <div class="grid-item left">Create task</div>
+  <div class="grid-item right">View tasks</div>
+
+  <div class="grid-item green-container">
     <img src="./images/Green-diffuse-circle.svg" alt="green diffuse circle" id="green-circle">
   </div>
-  <div class="grid-item" id="pink-container">
+  <div class="grid-item pink-container">
     <img src="./images/Pink-diffuse-circle.svg" alt="pink diffuse circle" id="pink-circle">
   </div>
-  <div class="grid-item" id="blue-container">
+  <div class="grid-item blue-container">
     <img src="./images/Blue-diffuse-circle.svg" alt="blue diffuse circle" id="blue-circle">
   </div>
-  <div class="grid-item" id="yellow-container">
+  <div class="grid-item yellow-container">
     <img src="./images/Yellow-diffuse-circle.svg" alt="yellow diffuse circle" id="yellow-circle">
   </div>
 </div>
