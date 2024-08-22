@@ -5,6 +5,7 @@
   color:black;
   font-weight: normal;
   font-size: 16px;
+  font-family: 'Manrope', sans-serif;
 }
 
 html {
@@ -24,7 +25,7 @@ body{
   position: relative;
   margin: auto;
   grid-template: repeat(10, 1fr) / repeat(8, 1fr);
-  gap: 5px 20px;
+  gap: 10px 25px;
   border: solid black 2px;
 }
 
@@ -34,10 +35,13 @@ body{
 
 header {
   grid-area: 1 / 1 / span 1 / span 8;
+  z-index: 1;
+  background-color: #7733ff;
+  color: white;
 }
 
 nav {
-  grid-area: 2 / 1 / span 9 / span 2;
+  grid-area: 1 / 1 / span 10 / span 2;
 }
 
 #left {
@@ -50,11 +54,23 @@ nav {
 
 /* Diffuse coloured circles */
 #green-container {
-  grid-area: 2 / 4 / span 4 / span 2;
+  grid-area: 1 / 4 / span 5 / span 2;
+  z-index: -1;
 }
 
 #pink-container {
-  grid-area: 5 / 3 / span 4 / span 2;
+  grid-area: 5 / 3 / span 5 / span 2;
+  z-index: -1;
+}
+
+#blue-container {
+  grid-area: 2 / 7 / span 5 / span 2;
+  z-index: -1;
+}
+
+#yellow-container {
+  grid-area: 6 / 5 / span 5 / span 2;
+  z-index: -1;
 }
 
 #green-circle, #pink-circle, #blue-circle, #yellow-circle {
@@ -62,6 +78,3 @@ nav {
   max-height: 100%;
 } 
 
-.circle {
-  z-index: -1;
-}
