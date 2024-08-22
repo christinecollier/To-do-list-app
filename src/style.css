@@ -77,19 +77,26 @@ header {
 }
 
 .side-pane {
-  grid-area: 2 / 1 / span 9 / span 2;
+  grid-area: 2 / 1 / span 8 / span 2;
   background-color: white;
   border: solid gray 2px;
 }
 
 .left {
-  grid-area: 2 / 3 / span 9 / span 3;
+  grid-area: 2 / 3 / span 8 / span 3;
   border: solid gray 2px;
 }
 
 .right {
-  grid-area: 2 / 6 / span 9 / span 3;
+  grid-area: 2 / 6 / span 8 / span 3;
   border: solid gray 2px;
+}
+
+.footer {
+  grid-area: 10 / 1 / span 1 / span 8;
+  z-index: 1;
+  background-color: #e6e6e6;
+  padding: 5px 3%;
 }
 
 /* Diffuse coloured circles */
@@ -158,4 +165,9 @@ header {
 .caption-box {
   background-color: white;
   border-radius: 15px;
+}
+
+.github {
+  height: 24px;
+  width: auto;
 }
