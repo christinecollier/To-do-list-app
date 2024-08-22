@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin:0;
   padding: 0;
-  color: white;
+  color: black;
   font-weight: normal;
   font-size: 16px;
   font-family: 'Manrope', sans-serif;
@@ -15,7 +15,8 @@ html {
 }
 
 body{
-  background-color: #F8F8F8;
+  /* background-color: #F8F8F8; */
+  background-color: #f3f3f3;
 }
 
 /* Grid structure */
@@ -30,17 +31,16 @@ body{
   border: solid black 2px;
 }
 
-.grid-item {
-  border: solid gray 2px;
-}
-
 header {
   grid-area: 1 / 1 / span 1 / span 8;
   z-index: 1;
   background-color: #7733ff;
-  color: inherit;
   padding: 5px 3%;
 }
+
+/* .grid-container header .nav-container {
+  color: white;
+} */
 
 /* .nav-container li {
   display: inline-block; 
@@ -53,7 +53,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 0 20px; */
   list-style: none;
 } 
 
@@ -70,22 +69,27 @@ header {
   font-weight: 500;
   font-size: 1.5rem;
   padding-left: 5px;
+  color: white;
 }
 
-/* #date-time {
-
-} */
+#day, #time {
+  color: white;
+}
 
 .side-pane {
-  grid-area: 2 / 1 / span 10 / span 2;
+  grid-area: 2 / 1 / span 9 / span 2;
+  background-color: white;
+  border: solid gray 2px;
 }
 
 .left {
   grid-area: 2 / 3 / span 9 / span 3;
+  border: solid gray 2px;
 }
 
 .right {
   grid-area: 2 / 6 / span 9 / span 3;
+  border: solid gray 2px;
 }
 
 /* Diffuse coloured circles */
@@ -114,3 +118,44 @@ header {
   max-height: 100%;
 } 
 
+
+/* Left section */
+.left-grid-container {
+  display: grid;
+  max-width: 100%;
+  height: 100%;
+  position: relative;
+  margin: auto;
+  /* 9 rows, 12 columns */
+  grid-template: repeat(9, 1fr) / repeat(12, 1fr);
+  gap: 15px 0;
+}
+
+/* Right section */
+.right-grid-container {
+  display: grid;
+  max-width: 100%;
+  height: 100%;
+  position: relative;
+  margin: auto;
+  grid-template: repeat(10, 1fr) / repeat(12, 1fr);
+  gap: 15px 0;
+}
+
+
+.right-1 {
+  grid-area: 2 / 2 / span 2 / span 10;
+}
+
+.right-2 {
+  grid-area: 4 / 2 / span 2 / span 10;
+}
+
+.right-3 {
+  grid-area: 6 / 2 / span 2 / span 10;
+}
+
+.caption-box {
+  background-color: white;
+  border-radius: 15px;
+}
