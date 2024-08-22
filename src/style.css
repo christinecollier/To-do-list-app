@@ -16,6 +16,7 @@ body{
   background-color: #F8F8F8;
 }
 
+/* Grid structure */
 #grid-container {
   display: grid;
   max-width: 100%;
@@ -28,24 +29,12 @@ body{
 }
 
 .grid-item {
-  border: black solid 2px;
+  border: solid black 2px;
 }
 
 header {
   grid-area: 1 / 1 / span 1 / span 8;
 }
-
-#green-container {
-  grid-area: 2 / 4 / span 4 / span 3;
-  z-index: -1;
-  /* max-width: 100%;
-  max-height: 100%; */
-}
-
-#green-circle {
-  max-width: 100%;
-  max-height: 100%;
-} 
 
 nav {
   grid-area: 2 / 1 / span 9 / span 2;
@@ -57,4 +46,22 @@ nav {
 
 #right {
   grid-area: 2 / 6 / span 9 / span 3;
+}
+
+/* Diffuse coloured circles */
+#green-container {
+  grid-area: 2 / 4 / span 4 / span 2;
+}
+
+#pink-container {
+  grid-area: 5 / 3 / span 4 / span 2;
+}
+
+#green-circle, #pink-circle, #blue-circle, #yellow-circle {
+  max-width: 100%;
+  max-height: 100%;
+} 
+
+.circle {
+  z-index: -1;
 }
