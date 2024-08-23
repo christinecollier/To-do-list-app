@@ -132,6 +132,7 @@ header {
 }
 
 .todo-app {
+  /* display: flex; */
   width: 100%;
   height: 100%;
 }
@@ -144,13 +145,14 @@ header {
   margin-top: 5px;
 } 
 
-.row input, .row button {
+.row .task-input-box, .row .task-btn {
   font-size: 0.8rem;
 }
 
 .row {
   display: flex;
   align-items: center;
+  width: 95%;
   justify-content: space-between;
   background-color: #F4EFFF;
   border-radius: 30px;
@@ -158,7 +160,7 @@ header {
   margin: 20px auto 25px auto;
 }
 
-input {
+.task-input-box {
   flex: 1;
   border: none;
   outline: none;
@@ -166,7 +168,7 @@ input {
   padding: 7 15px;
 }
 
-button {
+.task-btn {
   border: none;
   outline: none;
   padding: 7px 20px;
@@ -194,14 +196,17 @@ button {
 
 .right-1 {
   grid-area: 2 / 2 / span 2 / span 10;
+  padding: 10px 15px; 
 }
 
 .right-2 {
   grid-area: 4 / 2 / span 2 / span 10;
+  padding: 10px 15px; 
 }
 
 .right-3 {
   grid-area: 6 / 2 / span 2 / span 10;
+  padding: 10px 15px; 
 }
 
 .caption-box-right {
@@ -209,8 +214,25 @@ button {
   border-radius: 15px;
 }
 
-.icon, .github {
-  height: 1rem;
+.icon {
+  height: 0.8rem;
   width: auto;
   margin: 0 5px;
 }
+
+.github {
+  height: 1rem;
+  width: auto;
+  margin: 5px 5px;
+}
+
+@media only screen and (max-width: 900px){
+ .row {
+   flex-wrap: wrap;
+   background-color: transparent;
+  }
+ .task-input-box {
+  display: block;
+  /* margin-bottom: 10px; */
+ }
+} 
