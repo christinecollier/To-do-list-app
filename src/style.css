@@ -85,10 +85,13 @@ header {
 }
 
 .footer {
-  grid-area: 10 / 1 / span 1 / span 7;
+  grid-area: 10 / 2 / span 1 / span 7;
+  display: flex;
+  align-items: center;
   background-color: #e6e6e6;
-  padding: 3px 5%;
+  padding: 3px 2%;
   margin: 0;
+  border-top: solid gray 1px;
 }
 
 /* Diffuse coloured circles */
@@ -167,6 +170,7 @@ header {
 .home-icon-caption, .account-icon-caption {
   font-size: inherit;
 }
+
 /* Left section */
 .left-grid-container {
   display: grid;
@@ -185,7 +189,8 @@ header {
   grid-area: 2 / 2 / span 6 / span 11;
   background-color: white;
   border-radius: 15px;
-  padding: 10px 15px; 
+  padding: 10px 20px; 
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 2px;
 }
 
 .todo-app {
@@ -209,7 +214,7 @@ header {
 .row {
   display: flex;
   align-items: center;
-  width: 95%;
+  width: 90%;
   height: 1.75rem;
   justify-content: space-between;
   background-color: #F4EFFF;
@@ -255,22 +260,21 @@ header {
 
 .right-1 {
   grid-area: 2 / 2 / span 2 / span 10;
-  padding: 10px 15px; 
 }
 
 .right-2 {
   grid-area: 4 / 2 / span 2 / span 10;
-  padding: 10px 15px; 
 }
 
 .right-3 {
   grid-area: 6 / 2 / span 2 / span 10;
-  padding: 10px 15px; 
 }
 
 .caption-box-right {
   background-color: white;
   border-radius: 15px;
+  padding: 10px 15px; 
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 2px;
 }
 
 .icon {
@@ -282,57 +286,67 @@ header {
 .github {
   height: 1rem;
   width: auto;
-  margin: 5px 5px;
+  margin: 5px;
+}
+
+.footer-credits {
+  font-size: 0.8rem;
+}
+
+.my-name {
+  margin-left: auto;
 }
 
 @media only screen and (max-width: 900px){
+  #grid-container{
+    grid-template: repeat(11, 1fr) / repeat(7, 1fr);
+    gap: 20px 0px;
+    height: 100vh;
+    width: 100%;
+  }
   .side-pane {
-    grid-area: 2 / 1 / span 8 / span 1;
-  }  
+    grid-area: 1 / 1 / span 11 / span 1;
+    grid-template: repeat(8, 1fr) / 1fr;
+    padding: 30% 0;
+  }
   .left {
-    grid-area: 2 / 2 / span 4 / span 7;
+    grid-area: 2 / 2 / span 5 / span 6;
   }
   .left-box {
     grid-area: 2 / 2 / span 6 / span 10;
   }
   .right {
-    grid-area: 6 / 2/ span 4 / span 7;
+    grid-area: 5 / 2/ span 5 / span 6;
+    margin-top: 20px;
+  }
+  .footer {
+    grid-area: 11 / 2 / span 1 / span 6;
   }
   .row {
    flex-wrap: wrap;
    background-color: transparent;
   }
- /* .task-input-box {
-  display: block;
- } */
  .row .task-btn {
   margin-bottom: 10px;
   display: hidden;
  }
- .side-pane {
-  grid-area: 1 / 1 / span 10 / span 1;
-   grid-template: repeat(10, 1fr) / 1fr;
-   padding: 30% 0;
-}
-.pane-icon{
+ .pane-icon{
   height: 1.25rem;
   width: auto;
-}
+ }
  .hamburger-menu {
   visibility: visible;
  }
  .home-icon {
   grid-area: 3 / 1 / span 1 / span 1;
-}
-.home-icon-caption {
+ }
+ .home-icon-caption {
   display: none;
-}
-
-.account-icon {
+ }
+ .account-icon {
   grid-area: 4 / 1 / span 1 / span 1;
-}
-
-.account-icon-caption {
+ }
+ .account-icon-caption {
   display: none;
-}
+ }
 } 
