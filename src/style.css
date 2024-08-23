@@ -7,6 +7,7 @@
   font-size: 16px;
   font-family: 'Manrope', sans-serif;
   text-decoration: none;
+  /* border: solid gray 1px; */
 }
 
 html {
@@ -25,16 +26,17 @@ body{
   height: 100vh;
   position: relative;
   margin: auto;
-  grid-template: repeat(10, 1fr) / repeat(8, 1fr);
+  grid-template: repeat(10, 1fr) / repeat(7, 1fr);
   gap: 10px 0;
   border: solid black 2px;
 }
 
 header {
-  grid-area: 1 / 1 / span 1 / span 8;
+  grid-area: 1 / 1 / span 1 / span 7;
   z-index: 1;
   background-color: #7733ff;
   padding: 5px 3%;
+  z-index: 2;
 }
 
 .nav-container {
@@ -61,46 +63,51 @@ header {
 }
 
 .side-pane {
-  grid-area: 2 / 1 / span 8 / span 2;
+  grid-area: 1 / 1 / span 10 / span 1;
+  z-index: 1;
+  display: grid;
+  grid-template: repeat(10, 1fr) / 1fr 4fr;
   background-color: white;
   border: solid gray 2px;
+  padding-left: 15px;
 }
 
 .left {
-  grid-area: 2 / 3 / span 8 / span 3;
+  grid-area: 2 / 2 / span 8 / span 3;
+  min-width: 350px;
   /* border: solid gray 2px; */
 }
 
 .right {
-  grid-area: 2 / 6 / span 8 / span 3;
+  grid-area: 2 / 5 / span 8 / span 3;
+  min-width: 350px;
   /* border: solid gray 2px; */
 }
 
 .footer {
-  grid-area: 10 / 1 / span 1 / span 8;
-  z-index: 1;
+  grid-area: 10 / 1 / span 1 / span 7;
   background-color: #e6e6e6;
   padding: 5px 3%;
 }
 
 /* Diffuse coloured circles */
 .green-container {
-  grid-area: 1 / 4 / span 5 / span 2;
+  grid-area: 1 / 3 / span 5 / span 2;
   z-index: -1;
 }
 
 .pink-container {
-  grid-area: 5 / 3 / span 5 / span 2;
+  grid-area: 5 / 2 / span 5 / span 2;
   z-index: -1;
 }
 
 .blue-container {
-  grid-area: 2 / 7 / span 5 / span 2;
+  grid-area: 2 / 6 / span 5 / span 2;
   z-index: -1;
 }
 
 .yellow-container {
-  grid-area: 6 / 5 / span 5 / span 2;
+  grid-area: 6 / 4 / span 5 / span 2;
   z-index: -1;
 }
 
@@ -109,7 +116,53 @@ header {
   max-height: 100%;
 } 
 
+/* Side pane */
+.pane-icon {
+  height: 1rem;
+  width: auto;
+  align-items: center;
+  cursor: pointer;
+}
 
+.hamburger-menu {
+  visibility: hidden;
+  grid-area: 3 / 1 / span 1 / span 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-icon {
+  grid-area: 3 / 1 / span 1 / span 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-icon-caption {
+  grid-area: 3 / 2 / span 1 / span 1;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.account-icon {
+  grid-area: 4 / 1 / span 1 / span 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-icon-caption {
+  grid-area: 4 / 2 / span 1 / span 1;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.home-icon-caption, .account-icon-caption {
+  font-size: inherit;
+}
 /* Left section */
 .left-grid-container {
   display: grid;
@@ -117,7 +170,7 @@ header {
   height: 100%;
   position: relative;
   margin: auto;
-  grid-template: repeat(9, 1fr) / repeat(12, 1fr);
+  grid-template: repeat(10, 1fr) / repeat(12, 1fr);
   gap: 15px 0;
 }
 
@@ -132,7 +185,7 @@ header {
 }
 
 .todo-app {
-  /* display: flex; */
+  display: block;
   width: 100%;
   height: 100%;
 }
@@ -145,7 +198,7 @@ header {
   margin-top: 5px;
 } 
 
-.row .task-input-box, .row .task-btn {
+.row .task-input-box, .task-btn {
   font-size: 0.8rem;
 }
 
@@ -153,6 +206,7 @@ header {
   display: flex;
   align-items: center;
   width: 95%;
+  height: 1.75rem;
   justify-content: space-between;
   background-color: #F4EFFF;
   border-radius: 30px;
@@ -165,13 +219,14 @@ header {
   border: none;
   outline: none;
   background-color: transparent;
-  padding: 7 15px;
+  padding: 0 15px;
 }
 
 .task-btn {
   border: none;
   outline: none;
-  padding: 7px 20px;
+  height: 1.75rem;
+  padding: 0 15px;
   background-color: #7733ff;
   color: white;
   cursor: pointer;
@@ -227,12 +282,41 @@ header {
 }
 
 @media only screen and (max-width: 900px){
- .row {
+  .side-pane {
+    grid-area: 2 / 1 / span 8 / span 1;
+  }  
+  .left {
+    grid-area: 2 / 2 / span 4 / span 7;
+  }
+  .right {
+    grid-area: 6 / 2/ span 4 / span 7;
+  }
+  .row {
    flex-wrap: wrap;
    background-color: transparent;
   }
- .task-input-box {
+ /* .task-input-box {
   display: block;
-  /* margin-bottom: 10px; */
+ } */
+ .row .task-btn {
+  margin-bottom: 10px;
+  display: hidden;
  }
+ .hamburger-menu {
+  visibility: visible;
+ }
+ .home-icon {
+  grid-area: 4 / 1 / span 1 / span 1;
+}
+.home-icon-caption {
+  grid-area: 4 / 2 / span 1 / span 1;
+}
+
+.account-icon {
+  grid-area: 5 / 1 / span 1 / span 1;
+}
+
+.account-icon-caption {
+  grid-area: 5 / 2 / span 1 / span 1;
+}
 } 
