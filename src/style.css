@@ -25,10 +25,10 @@ body{
   max-width: 100%;
   height: 100vh;
   position: relative;
-  margin: auto;
+  padding: 0;
+  margin: 0 auto;
   grid-template: repeat(10, 1fr) / repeat(7, 1fr);
   gap: 10px 0;
-  border: solid black 2px;
 }
 
 header {
@@ -68,8 +68,8 @@ header {
   display: grid;
   grid-template: repeat(10, 1fr) / 1fr 4fr;
   background-color: white;
-  border: solid gray 2px;
-  padding-left: 15px;
+  border-right: solid gray 2px;
+  padding: 22% 0 20% 5%;
 }
 
 .left {
@@ -87,7 +87,8 @@ header {
 .footer {
   grid-area: 10 / 1 / span 1 / span 7;
   background-color: #e6e6e6;
-  padding: 5px 3%;
+  padding: 3px 5%;
+  margin: 0;
 }
 
 /* Diffuse coloured circles */
@@ -126,38 +127,41 @@ header {
 
 .hamburger-menu {
   visibility: hidden;
-  grid-area: 3 / 1 / span 1 / span 1;
+  grid-area: 2 / 1 / span 1 / span 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .home-icon {
+  grid-area: 2 / 1 / span 1 / span 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* transition: all 400ms ease 2s; */
+}
+
+.home-icon-caption {
+  grid-area: 2 / 2 / span 1 / span 1;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  cursor: pointer;
+}
+
+.account-icon {
   grid-area: 3 / 1 / span 1 / span 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.home-icon-caption {
+.account-icon-caption {
   grid-area: 3 / 2 / span 1 / span 1;
   display: flex;
   align-items: center;
   justify-content: start;
-}
-
-.account-icon {
-  grid-area: 4 / 1 / span 1 / span 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.account-icon-caption {
-  grid-area: 4 / 2 / span 1 / span 1;
-  display: flex;
-  align-items: center;
-  justify-content: start;
+  cursor: pointer;
 }
 
 .home-icon-caption, .account-icon-caption {
@@ -288,6 +292,9 @@ header {
   .left {
     grid-area: 2 / 2 / span 4 / span 7;
   }
+  .left-box {
+    grid-area: 2 / 2 / span 6 / span 10;
+  }
   .right {
     grid-area: 6 / 2/ span 4 / span 7;
   }
@@ -302,21 +309,30 @@ header {
   margin-bottom: 10px;
   display: hidden;
  }
+ .side-pane {
+  grid-area: 1 / 1 / span 10 / span 1;
+   grid-template: repeat(10, 1fr) / 1fr;
+   padding: 30% 0;
+}
+.pane-icon{
+  height: 1.25rem;
+  width: auto;
+}
  .hamburger-menu {
   visibility: visible;
  }
  .home-icon {
-  grid-area: 4 / 1 / span 1 / span 1;
+  grid-area: 3 / 1 / span 1 / span 1;
 }
 .home-icon-caption {
-  grid-area: 4 / 2 / span 1 / span 1;
+  display: none;
 }
 
 .account-icon {
-  grid-area: 5 / 1 / span 1 / span 1;
+  grid-area: 4 / 1 / span 1 / span 1;
 }
 
 .account-icon-caption {
-  grid-area: 5 / 2 / span 1 / span 1;
+  display: none;
 }
 } 
