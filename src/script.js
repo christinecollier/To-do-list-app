@@ -8,17 +8,31 @@
 // let year = date.getFullYear();
 
 // let currentDate = `${day}-${month}-${year} ${hours}:${minutes}`;
-// document.getElementById("date-time").textContent = currentDate;
+// document.getElementById("month").textContent = currentDate;
+
+// function date(){
+//   let month = document.getElementById("month");
+//   let day = document.getElementById("day");
+//   let weekday = document.getElementById("weekday");
+
+//   let currentDate = new Date();
+//   month.innerHTML = currentDate.getMonth() + 1;
+//   day.innerHTML = currentDate.getDate();
+//   weekday.innerHTML = currentDate.getDay();
+// }
+// setInterval(function(){
+//   date();
+// },60000);
 
 
 function time(){
-    var date = new Date();    
-    var time = date.toLocaleTimeString();
-    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    var day = date.toLocaleDateString('en-US',options);
-    document.getElementById('time').innerHTML = time;
-    document.getElementById('day').innerHTML = day;
-  }
-  setInterval(function(){
-    time();
-  },1000);
+  let hrs = document.getElementById("hrs");
+  let min = document.getElementById("min");
+
+  let currentTime = new Date();
+  hrs.innerHTML = currentTime.getHours();
+  min.innerHTML = currentTime.getMinutes().toString().padStart(2, '0');
+}
+setInterval(function(){
+  time();
+},1000);
