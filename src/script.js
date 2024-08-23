@@ -1,30 +1,4 @@
-// Gets current date and time
-// const date = new Date();
-
-// let minutes = date.getMinutes();
-// let hours = date.getHours();
-// let day = date.getDate();
-// let month = date.getMonth() + 1;
-// let year = date.getFullYear();
-
-// let currentDate = `${day}-${month}-${year} ${hours}:${minutes}`;
-// document.getElementById("month").textContent = currentDate;
-
-// function date(){
-//   let month = document.getElementById("month");
-//   let day = document.getElementById("day");
-//   let weekday = document.getElementById("weekday");
-
-//   let currentDate = new Date();
-//   month.innerHTML = currentDate.getMonth() + 1;
-//   day.innerHTML = currentDate.getDate();
-//   weekday.innerHTML = currentDate.getDay();
-// }
-// setInterval(function(){
-//   date();
-// },60000);
-
-
+// Gets current time (hours and minutes)
 function time(){
   let hrs = document.getElementById("hrs");
   let min = document.getElementById("min");
