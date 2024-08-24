@@ -10,3 +10,31 @@ function time(){
 setInterval(function(){
   time();
 },1000);
+
+
+// function addTask() {
+// const taskInputBox = document.getElementsByClassName("task-input-box");
+// const rightListContainer = document.getElementsByClassName("right-list-container");
+
+//   if(taskInputBox.value === '') {
+//     alert("Task title empty");
+//   }
+//   else {
+//     let li = document.createElement('li');
+//     document.getElementsByClassName("task-1").textContent = taskInputBox;
+//     document.
+//   }
+// }
+
+
+function addTask() {
+const taskInputBox = document.getElementById("task-input-box").value;
+const rightListContainer = document.getElementById("right-list-container");
+const task = document.createElement("li");
+rightListContainer.appendChild(task);
+task.textContent = taskInputBox;
+}
+// function checkUncheck() {
+//   const button = document.getElementsByTagName('button').style.backgroundColor = '#7733ff';
+// }
+
