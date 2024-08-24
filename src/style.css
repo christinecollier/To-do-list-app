@@ -231,7 +231,7 @@ header {
   border: none;
   outline: none;
   background-color: transparent;
-  padding: 0 15px;
+  padding-right: 15px;
 }
 
 .task-btn {
@@ -265,29 +265,29 @@ header {
   display: grid;
   grid-template: repeat(10, 1fr), 1fr;
   gap: 15px 0;
-  grid-auto-rows: 2fr;
+  grid-auto-rows: 50px;
   grid-auto-columns: 10fr;
   grid-auto-flow: row;
+  list-style: none;
 }
 
-/* #right-list-container li{
-  list-style: none;
+/* #right-list-container li{ */
+.task-container {
   padding: 5px 10px;
   user-select: none;
-  cursor: pointer;
   border-radius: 15px;
-  border: solid gray 1px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 2px;
   display: grid;
   grid-template: "task-row-1"
                  "task-row-2";
   gap: 0.5rem;
+  background-color: white;
 }
 
-#right-list-container li span {
-  font-size: 0.8rem;
+.task-row-1, .task-row-2 {
   display: flex;
   align-items: center;
-} */
+}
 
 .task-row-1 {
   grid-area: "task-row-1";
@@ -306,10 +306,13 @@ header {
   cursor: pointer;
   color: white;
   font-family: 'Outfit';
-  /* grid-area: 1 / 1 / span 1 / span 1; */
   margin-right: 5px;
 }
 
+.task-title {
+  font-size: 0.8rem;
+  cursor: pointer;
+}
 /* .right-1 {
   grid-area: 2 / 2 / span 2 / span 10;
 }

@@ -4,7 +4,7 @@ function time(){
   let min = document.getElementById("min");
 
   let currentTime = new Date();
-  hrs.innerHTML = currentTime.getHours();
+  hrs.innerHTML = currentTime.getHours().toString().padStart(2, '0');
   min.innerHTML = currentTime.getMinutes().toString().padStart(2, '0');
 }
 setInterval(function(){
@@ -12,28 +12,36 @@ setInterval(function(){
 },1000);
 
 
-// function addTask() {
-// const taskInputBox = document.getElementsByClassName("task-input-box");
-// const rightListContainer = document.getElementsByClassName("right-list-container");
-
-//   if(taskInputBox.value === '') {
-//     alert("Task title empty");
-//   }
-//   else {
-//     let li = document.createElement('li');
-//     document.getElementsByClassName("task-1").textContent = taskInputBox;
-//     document.
-//   }
-// }
-
-
+// Gets task input and creates a new task as a list item
 function addTask() {
-const taskInputBox = document.getElementById("task-input-box").value;
-const rightListContainer = document.getElementById("right-list-container");
-const task = document.createElement("li");
-rightListContainer.appendChild(task);
-task.textContent = taskInputBox;
-}
+  const taskInputBox = document.getElementById("task-input-box").value;
+  const rightListContainer = document.getElementById("right-list-container");
+ 
+  const taskContainer = document.createElement("li");     //Create a new li called 'taskContainer'
+  rightListContainer.appendChild(taskContainer);          //Add 'taskContainer' to rightListContainer
+  taskContainer.setAttribute('class','task-container');   //Set class = task-container
+
+  const taskRow1 = document.createElement("div");        
+  taskContainer.appendChild(taskRow1);          
+  taskRow1.setAttribute('class','task-row-1');   
+
+  const taskRow2 = document.createElement("div");        
+  taskContainer.appendChild(taskRow2);          
+  taskRow2.setAttribute('class','task-row-2');   
+  
+  const checkCircle = document.createElement("div");      //Create checkCircle as div
+  taskRow1.appendChild(checkCircle);                      //Add the checkCircle to the rightListContainer
+  checkCircle.setAttribute('class','check-circle')        //Set class of new div to 'check-circle'
+
+  const taskTitle = document.createElement("div");        //Create a new div called 'task'
+  taskRow1.appendChild(taskTitle);                        //Add 'task' to rightListContainer
+  taskTitle.textContent = taskInputBox;                   //Set content of 'task' to whatever is in the input box
+  taskTitle.setAttribute('class','task-title');           //Set class
+
+
+  //Add code here for adding details/deadline infor to taskRow2
+} 
+
 // function checkUncheck() {
 //   const button = document.getElementsByTagName('button').style.backgroundColor = '#7733ff';
 // }

@@ -45,7 +45,7 @@
               <h2>Create a new task<img class="icon" src="./images/Pencil.svg"></h2>
               <div class="row">
                 <input type="text" id="task-input-box" name ="task-input-box" placeholder="e.g. Learn HTML, CSS and JS" required>
-                <button class="task-btn" value="new-task">Add</button>
+                <button class="task-btn" onclick="addTask()" value="new-task">Add</button>
               </div>
             </div>
           </div> 
@@ -55,7 +55,6 @@
       <!-- Right section -->
       <div class="right">
         <div class="right-grid-container">
-          <button onclick="addTask()">Button</button>
           <ul id="right-list-container">
               <!-- <li>
                 <span class="task-row-1"><button class="check-circle" onclick="addTask()"></button><span class="task-1">Task 1</span></span>
