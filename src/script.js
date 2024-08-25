@@ -12,11 +12,20 @@ setInterval(function(){
 },1000);
 
 
+
 // Gets task input and creates a new task as a list item
 function addTask() {
   const taskInputBox = document.getElementById("task-input-box").value;
   const rightListContainer = document.getElementById("right-list-container");
  
+  if(document.getElementById("right-list-container").textContent=="") {
+    document.getElementById("right-grid-welcome").hidden = false;           //Hide welcome picture when new task is added
+  }
+  else{
+    document.getElementById("right-grid-welcome").hidden = true;            //Shows welcome picture when task list is empty
+  }
+  
+  
   const taskContainer = document.createElement("li");     //Create a new li called 'taskContainer'
   rightListContainer.appendChild(taskContainer);          //Add 'taskContainer' to rightListContainer
   taskContainer.setAttribute('class','task-container');   //Set class = task-container

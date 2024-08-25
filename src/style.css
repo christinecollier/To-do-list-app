@@ -260,6 +260,12 @@ header {
   grid-template: repeat(10, 1fr) / repeat(12, 1fr);
 }
 
+#right-grid-welcome {
+  grid-area: 2 / 2 / span 8 / span 10;
+  background-color: white;
+  border-radius: 15px;
+}
+
 #right-list-container {
   grid-area: 2 / 2 / span 8 / span 10;
   display: grid;
