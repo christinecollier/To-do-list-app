@@ -31,6 +31,71 @@ body{
   gap: 10px 0;
 }
 
+/* Experimental app start welcome page from here */
+
+.app-start-backdrop {
+  grid-area: 1 / 1 / span 10 / span 7;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background-color: #7733ff;
+  opacity: 60%;
+  visibility: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: app-start-animation 1s 1;
+}
+.app-start-welcome {
+  z-index: 4;
+  margin: 0 auto;
+  opacity: 50%;
+  animation: app-start-animation 1s 1;
+  opacity: 1;
+}
+
+/* .welcome-logo {
+  width: 2.25rem;
+  margin-right: 5px;
+  animation: app-start-plane-size 2s 1;
+} */
+
+.welcome-delta {
+  display: inline-flex;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 3rem;
+  color: white;
+  animation: app-start-animation 1s 1;
+}
+
+@keyframes app-start-animation {
+  0% { }
+  5% {font-size: 3rem; }
+  25%{font-size: 2.5rem; }
+  55% {font-size: 3.75rem;
+    /* box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.2); */
+  }
+  80% {font-size: 3.75rem; }
+  90% {font-size: 3.75rem;
+    box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+  }
+  100% {opacity: 0%; }
+}
+
+/* @keyframes app-start-plane-size {
+  0%{ }
+  5%{width: 2.25rem; }
+  25%{width: 1.875rem; }
+  55%{width: 2.625rem;}
+  80%{width: 2.625rem;}
+  100%{width: 2.625rem;}
+} */
+
+
+
+/* Experimental app start welcome page to here */
+
 header {
   grid-area: 1 / 1 / span 1 / span 7;
   z-index: 1;
