@@ -7,7 +7,6 @@ Highlights:
 - Dynamic and interactive            | JavaScript to modify the DOM
 - Aesthetic appeal, user experience  | HTML and CSS
 
-
 New skills learnt:
 
-- JavaScript | .setAttribute() 
+- JavaScript | using .setAttribute() to assign id/class to elements created with JavaScript.
