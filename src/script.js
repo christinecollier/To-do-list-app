@@ -26,7 +26,7 @@ function addTask() {
   const taskInputBox = document.getElementById("task-input-box").value;
   const rightListContainer = document.getElementById("right-list-container");
  
-  if(document.getElementById("right-list-container").textContent=="") {
+  if(document.getElementById("right-list-container").value == "") {
     document.getElementById("right-grid-welcome").hidden = false;           //Hide welcome picture when new task is added
   }
   else{

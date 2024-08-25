@@ -260,33 +260,22 @@ header {
   grid-template: repeat(10, 1fr) / repeat(12, 1fr);
 }
 
-#right-grid-welcome {
-  grid-area: 2 / 2 / span 8 / span 10;
+#right-grid-welcome {                         /*not made a flex container as isplay property*/
+  grid-area: 2 / 2 / span 8 / span 10;        /* is changed to hidden by JS ('display:flex' overrides the 'display:hidden' style) */
   background-color: white;
   border-radius: 15px;
-  transition: opacity 1s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;        /* aligns items horizontally */
-  justify-content: center;    /* aligns items vertically */
+  position: relative
 }
 /* .removed {
   opacity: 0;
 } */
 
-.file-icon {
-  display: block;
-  width: 17%;
-  height: auto;
-}
-
-.no-task-caption {
-  display: block;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #BFCDE7;
-  padding-top: 10px;
-  transition: all 400ms ease 0;
+#welcome-flex-container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;        /* aligns items horizontally */
+  justify-content: center;    /* aligns items vertically */
 }
 
 #right-list-container {
@@ -298,6 +287,21 @@ header {
   grid-auto-columns: 10fr;
   grid-auto-flow: row;
   list-style: none;
+}
+
+.file-icon {
+  display: block;
+  /* width: 17%; */
+  max-width: 4.5rem;
+  height: auto;
+}
+
+.no-task-caption {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #BFCDE7;
+  padding-top: 10px;
 }
 
 /* #right-list-container li{ */
