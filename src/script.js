@@ -11,7 +11,15 @@ setInterval(function(){
   time();
 },1000);
 
-
+// let btn = document.querySelector("#task-btn");
+// let welcome = document.querySelector("#right-grid-welcome");
+// btn.addEventListener("click", e => {  
+//   welcome.classList.add("removed");
+// });
+// welcome.addEventListener("transitionend", () => 
+// {
+//   welcome.remove();
+// })
 
 // Gets task input and creates a new task as a list item
 function addTask() {

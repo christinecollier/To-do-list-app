@@ -264,6 +264,29 @@ header {
   grid-area: 2 / 2 / span 8 / span 10;
   background-color: white;
   border-radius: 15px;
+  transition: opacity 1s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;        /* aligns items horizontally */
+  justify-content: center;    /* aligns items vertically */
+}
+/* .removed {
+  opacity: 0;
+} */
+
+.file-icon {
+  display: block;
+  width: 17%;
+  height: auto;
+}
+
+.no-task-caption {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #BFCDE7;
+  padding-top: 10px;
+  transition: all 400ms ease 0;
 }
 
 #right-list-container {
@@ -409,5 +432,13 @@ header {
  }
  .account-icon-caption {
   display: none;
+ }
+ .file-icon {
+  flex-basis: 10%;
+  max-width: 10%;
+ }
+ .no-task-caption{
+  font-size: 0.9rem;
+  font-weight: 500;
  }
 } 
