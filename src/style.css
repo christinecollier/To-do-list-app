@@ -345,6 +345,7 @@ header {
   border-radius: 1.5rem;
   cursor: pointer;
   justify-self: end;
+  align-self: center;
   z-index: 1;
 }
 
