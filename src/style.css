@@ -39,16 +39,15 @@ body{
   height: 100%;
   z-index: 3;
   background-color: #7733ff;
-  opacity: 60%;
-  visibility: visible;
+  visibility: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   animation: app-start-animation 1s 1;
 }
 .app-start-welcome {
+  display: inline-flex;
   z-index: 4;
-  margin: 0 auto;
   opacity: 50%;
   animation: app-start-animation 1s 1;
   opacity: 1;
@@ -56,43 +55,33 @@ body{
 
 /* .welcome-logo {
   width: 2.25rem;
-  margin-right: 5px;
-  animation: app-start-plane-size 2s 1;
+  margin-right: 2%;
+  animation: app-start-plane 2s 1;
 } */
 
 .welcome-delta {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
+  align-items: center;
   font-weight: 600;
   font-size: 3rem;
   color: white;
-  animation: app-start-animation 1s 1;
+  animation: app-start-animation 1s 50ms;
 }
 
 @keyframes app-start-animation {
-  0% { }
-  5% {font-size: 3rem; }
-  25%{font-size: 2.5rem; }
-  55% {font-size: 3.75rem;
-    /* box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.2); */
-  }
-  80% {font-size: 3.75rem; }
-  90% {font-size: 3.75rem;
-    box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
-  }
-  100% {opacity: 0%; }
+0%  {visibility: visible;}
+40% {font-size: 2.5rem; opacity: 60%}
+55% {font-size: 6rem;}
+100% {font-size: 6rem; opacity: 0%; visibility: visible; }
 }
 
-/* @keyframes app-start-plane-size {
+/* @keyframes app-start-plane {
   0%{ }
-  5%{width: 2.25rem; }
-  25%{width: 1.875rem; }
-  55%{width: 2.625rem;}
-  80%{width: 2.625rem;}
-  100%{width: 2.625rem;}
+  40%{width: 1.865rem; }
+  55%{width: 5rem;}
+  100%{width: 5rem;}
 } */
-
-
 
 /* Experimental app start welcome page to here */
 
