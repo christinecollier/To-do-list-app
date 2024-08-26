@@ -323,7 +323,7 @@ header {
   height: 2rem;
   padding: 0 1.25rem;
   background-color: #7733ff;
-  margin-right: 1rem;
+  margin-left: auto;
   border-radius: 25px;
   color: white;
   cursor: pointer;
