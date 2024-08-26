@@ -59,7 +59,4 @@ function addTask() {
   //Add code here for adding details/deadline infor to taskRow2
 } 
 
-// function checkUncheck() {
-//   const button = document.getElementsByTagName('button').style.backgroundColor = '#7733ff';
-// }
 

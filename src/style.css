@@ -122,10 +122,10 @@ header {
   grid-area: 1 / 1 / span 10 / span 1;
   z-index: 1;
   display: grid;
-  grid-template: repeat(10, 1fr) / 1fr 4fr;
+  grid-template: repeat(15, 1fr) / 1fr 4fr;
   background-color: white;
   border-right: solid gray 2px;
-  padding: 22% 0 20% 10%;
+  padding: 5.5rem 1.25rem;
 }
 
 .left {
@@ -251,27 +251,100 @@ header {
 }
 
 .todo-app {
-  display: block;
+  /* display: block; */
+  display: grid;
+  grid-template: repeat(6, 1fr) / repeat(2, 1fr);
   width: 100%;
   height: 100%;
+  align-items: center;
 }
 
 .todo-app h2 {
+  grid-area: 1 / 1 / span 1 / span 2; 
   display: flex;
   align-items: center;
   color: inherit;
   font-weight: 500;
-  margin-top: 5px;
 } 
 
-.row #task-input-box, .task-btn {
+.row #task-input-box, .task-btn-expanded, .deadline {
   font-size: 0.8rem;
 }
 
 .row {
+  grid-area: 2 / 1 / span 1 / span 2; 
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 90%;
+  height: 2rem;
+  justify-self: center;
+  align-self: center;
+  background-color: #F4EFFF;
+  border-radius: 30px;
+  padding-left: 1rem;
+  /* margin: 20px auto 25px auto; */
+}
+
+#task-input-box {
+  flex: 1;
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding-right: 1rem;
+}
+
+.task-btn-expanded {
+  grid-area: 2 / 1 / span 1 / span 2; 
+  border: none;
+  outline: none;
+  height: 2rem;
+  padding: 0 20px;
+  background-color: #7733ff;
+  margin-right: 1rem;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  justify-self: end;
+  z-index: 1;
+}
+
+.minimised-btn-container {
+  grid-area: 6 / 2 / span 1 / span 1;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 2rem;
+  width: 2rem;
+  background-color: #7733ff;
+  margin-right: 1rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  justify-self: end;
+  z-index: 1;
+}
+
+.task-btn-minimised {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding-bottom: 0.15rem;
+  padding-left: 0.05rem;
+}
+
+.deadline-row{
+  /* grid-area: ; */
+  display: flex;
+  align-items: center;
+  width: 30%;
   height: 1.75rem;
   justify-content: space-between;
   background-color: #F4EFFF;
@@ -280,26 +353,11 @@ header {
   margin: 20px auto 25px auto;
 }
 
-#task-input-box {
-  flex: 1;
-  border: none;
-  outline: none;
+.deadline {
+  /* border: none; */
   background-color: transparent;
-  padding-right: 15px;
+  color: inherit;
 }
-
-.task-btn {
-  border: none;
-  outline: none;
-  height: 1.75rem;
-  padding: 0 15px;
-  background-color: #7733ff;
-  color: white;
-  cursor: pointer;
-  border-radius: 25px;
-}
-
-
 /* Todo app to here */
 /**/
 
@@ -335,16 +393,17 @@ header {
 #right-list-container {
   grid-area: 2 / 2 / span 8 / span 10;
   display: grid;
-  grid-template: repeat(10, 1fr), 1fr;
+  grid-template: repeat(10, 1fr) / 1fr;
   gap: 15px 0;
-  grid-auto-rows: 50px;
+  min-height: 2rem;
+  /* grid-auto-rows: 2.25rem; */
   grid-auto-columns: 10fr;
   grid-auto-flow: row;
   list-style: none;
   overflow-y: auto;
   /* Custom scrollbar for Firefox */
-  scrollbar-color: #cfb8fc #f3f3f3;
-  scrollbar-width: thin;
+  /* scrollbar-color: hsl(219, 45%, 83%) white;
+  scrollbar-width: thin; */
 }
 
 /* Custom scrollbar for Chrome, Edge, and Safari */
@@ -352,12 +411,16 @@ header {
   width: 0.5rem;
 }
 *::-webkit-scrollbar-track {
-  background: #f3f3f3;
+  background: none;
+  width: 1rem;
 }
 *::-webkit-scrollbar-thumb {
-  background-color: #cfb8fc;
-  border-radius: 0.1rem;
+  background-color: 	hsl(219, 45%, 83%);
+  border-radius: 0.5rem;
   border: none;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: 	hsl(219, 45%, 73%);
 }
 /* Custom scrollbar to here */
 
@@ -482,38 +545,39 @@ header {
     grid-area: 11 / 2 / span 1 / span 6;
   }
   .row {
-   flex-wrap: wrap;
-   background-color: transparent;
+    flex-wrap: wrap;
   }
- .row .task-btn {
-  margin-bottom: 10px;
-  display: hidden;
- }
- .pane-icon{
-  height: 1.25rem;
-  width: auto;
- }
- .hamburger-menu {
-  visibility: visible;
- }
- .home-icon {
-  grid-area: 3 / 1 / span 1 / span 1;
- }
- .home-icon-caption {
-  display: none;
- }
- .account-icon {
-  grid-area: 4 / 1 / span 1 / span 1;
- }
- .account-icon-caption {
-  display: none;
- }
- .file-icon {
-  flex-basis: 10%;
-  max-width: 10%;
- }
- .no-task-caption{
+  .task-btn-expanded {
+    visibility: hidden;
+  }
+  .minimised-btn-container {
+    visibility: visible;
+  }
+  .pane-icon{
+    height: 1.25rem;
+    width: auto;
+  }
+  .hamburger-menu {
+    visibility: visible;
+  }
+  .home-icon {
+    grid-area: 3 / 1 / span 1 / span 1;
+  }
+  .home-icon-caption {
+    display: none;
+  }
+  .account-icon {
+    grid-area: 4 / 1 / span 1 / span 1;
+  }
+  .account-icon-caption {
+    display: none;
+  }
+  .file-icon {
+    flex-basis: 10%;
+    max-width: 10%;
+  }
+  .no-task-caption{
   font-size: 0.9rem;
   font-weight: 500;
- }
+  }
 } 
