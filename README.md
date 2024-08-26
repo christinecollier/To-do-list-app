@@ -1,5 +1,5 @@
 # To-do-list-app
-A website that allows a user to input and check off tasks. 
+A productivity web app that allows the user to manage their tasks. 
 
 Highlights:
 
