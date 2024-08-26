@@ -69,12 +69,12 @@ body{
   animation: app-start-animation 1s 50ms;
 }
 
-@keyframes app-start-animation {
+/* @keyframes app-start-animation {
 0%  {visibility: visible;}
 40% {font-size: 2.5rem; opacity: 60%}
 55% {font-size: 6rem;}
 100% {font-size: 6rem; opacity: 0%; visibility: visible; }
-}
+} */
 
 /* @keyframes app-start-plane {
   0%{ }
@@ -341,7 +341,25 @@ header {
   grid-auto-columns: 10fr;
   grid-auto-flow: row;
   list-style: none;
+  overflow-y: auto;
+  /* Custom scrollbar for Firefox */
+  scrollbar-color: #cfb8fc #f3f3f3;
+  scrollbar-width: thin;
 }
+
+/* Custom scrollbar for Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 0.5rem;
+}
+*::-webkit-scrollbar-track {
+  background: #f3f3f3;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #cfb8fc;
+  border-radius: 0.1rem;
+  border: none;
+}
+/* Custom scrollbar to here */
 
 .file-icon {
   display: block;
@@ -358,7 +376,6 @@ header {
   padding-top: 10px;
 }
 
-/* #right-list-container li{ */
 .task-container {
   padding: 5px 10px;
   user-select: none;
