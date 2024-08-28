@@ -17,6 +17,7 @@
   --main-text-color: #1e3050;
   --footer-color: #e6e6e6;
   --light-grey-color: #f3f3f3;
+  --expand-on-hover: all 1s ease-in-out 0;
 }
 
 html {
@@ -116,7 +117,7 @@ header {
   width: auto;
 }
 
-.logo:hover, .delta:hover {
+.logo:hover, .delta:hover{
   cursor: pointer;
 }
 
@@ -230,6 +231,10 @@ header {
   align-items: center;
   justify-content: start;
   cursor: pointer;
+}
+
+.logo:hover, .pane-icon:hover {
+  transform: scale(1.08);
 }
 
 .home-icon-caption, .account-icon-caption {
@@ -380,7 +385,7 @@ header {
   height: 1.75rem;
   /* justify-content: space-between; */
   /* background-color: gray; */
-  padding-left: 1rem;
+  padding-left: 0.5rem;
   margin: 20px auto 25px auto;
   color: var(--main-text-color, #1e3050);
 }
@@ -428,6 +433,7 @@ header {
   flex-direction: column;
   align-items: center;        /* aligns items horizontally */
   justify-content: center;    /* aligns items vertically */
+  transition: var(--expand-on-hover);
 }
 
 #right-list-container {
@@ -477,6 +483,10 @@ header {
   font-weight: 600;
   color: #BFCDE7;
   padding-top: 10px;
+}
+
+#welcome-flex-container:hover {
+  transform: scale(1.03)
 }
 
 .task-container {
@@ -576,14 +586,13 @@ header {
     padding: 30% 0;
   }
   .left {
-    grid-area: 2 / 2 / span 5 / span 6;
+    grid-area: 2 / 2 / span 4 / span 6;
   }
   .left-box {
-    grid-area: 2 / 2 / span 6 / span 10;
+    grid-area: 2 / 2 / span 8 / span 10;
   }
   .right {
     grid-area: 5 / 2/ span 5 / span 6;
-    margin-top: 20px;
   }
   .footer {
     grid-area: 11 / 2 / span 1 / span 6;
@@ -593,6 +602,9 @@ header {
   }
   .task-btn-expanded {
     visibility: hidden;
+  }
+  .deadline-row{
+    margin: 0 auto;
   }
   .minimised-btn-container {
     visibility: visible;
@@ -616,6 +628,9 @@ header {
   .account-icon-caption {
     display: none;
   }
+  #right-grid-welcome{
+    grid-area: 3 / 2 / span 8 / span 10;
+  }
   .file-icon {
     flex-basis: 10%;
     max-width: 10%;
@@ -625,3 +640,10 @@ header {
   font-weight: 500;
   }
 } 
+
+/* Placeholder styling added. Change styles for this vh */
+@media only screen and (max-height: 845px){
+  .left-box {
+    background-color: pink;
+  }
+}
