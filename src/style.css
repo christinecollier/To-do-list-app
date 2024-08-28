@@ -2,12 +2,21 @@
   box-sizing: border-box;
   margin:0;
   padding: 0;
-  color: #1e3050;
+  color: var(--main-text-color, #1e3050);
   font-weight: normal;
   font-size: 16px;
   font-family: 'Manrope', sans-serif;
   text-decoration: none;
   /* border: solid gray 1px; */
+}
+
+:root{
+  --main-background-color: #f3f3f3;
+  --main-purple-color: #7733ff;
+  --light-purple-color: #F4EFFF;
+  --main-text-color: #1e3050;
+  --footer-color: #e6e6e6;
+  --light-grey-color: #f3f3f3;
 }
 
 html {
@@ -16,7 +25,7 @@ html {
 }
 
 body{
-  background-color: #f3f3f3;
+  background-color: var(--main-background-color, #f3f3f3);
 }
 
 /* Grid structure */
@@ -38,7 +47,7 @@ body{
   width: 100%;
   height: 100%;
   z-index: 3;
-  background-color: #7733ff;
+  background-color: var(--main-purple-color, #7733ff);
   visibility: hidden;
   display: flex;
   justify-content: center;
@@ -88,7 +97,7 @@ body{
 header {
   grid-area: 1 / 1 / span 1 / span 7;
   z-index: 1;
-  background-color: #7733ff;
+  background-color: var(--main-purple-color,#7733ff);
   padding: 5px 3%;
   z-index: 2;
   display: flex;
@@ -144,7 +153,7 @@ header {
   grid-area: 10 / 2 / span 1 / span 7;
   display: flex;
   align-items: center;
-  background-color: #e6e6e6;
+  background-color: var(--footer-color, #e6e6e6);
   padding: 3px 2%;
   margin: 0;
   border-top: solid gray 1px;
@@ -280,7 +289,7 @@ header {
   height: 2rem;
   justify-self: center;
   align-self: center;
-  background-color: #F4EFFF;
+  background-color: var(--light-purple-color, #F4EFFF);
   border-radius: 30px;
   padding-left: 1rem;
 }
@@ -307,7 +316,7 @@ header {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.8rem;
-  background-color: #f3f3f3;
+  background-color: var(--light-grey-color, #f3f3f3);
   font-size: 0.75rem;
   /* see webkit-line-clamp to limit text input length */
 }
@@ -322,7 +331,7 @@ header {
   outline: none;
   height: 2rem;
   padding: 0 1.25rem;
-  background-color: #7733ff;
+  background-color: var(--main-purple-color, #7733ff);
   margin-left: auto;
   border-radius: 25px;
   color: white;
@@ -340,7 +349,7 @@ header {
   text-align: center;
   height: 2rem;
   width: 2rem;
-  background-color: #7733ff;
+  background-color: var(--main-purple-color, #7733ff);
   margin-right: 1rem;
   border-radius: 1.5rem;
   cursor: pointer;
@@ -373,7 +382,7 @@ header {
   /* background-color: gray; */
   padding-left: 1rem;
   margin: 20px auto 25px auto;
-  color: #1e3050;
+  color: var(--main-text-color, #1e3050);
 }
 
 .deadline-row span {
@@ -480,6 +489,10 @@ header {
                  "task-row-2";
   gap: 0.5rem;
   background-color: white;
+}
+
+.task-container:hover {
+  background-color: var(--light-grey-color, #f3f3f3); 
 }
 
 .task-row-1, .task-row-2 {
