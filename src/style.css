@@ -123,7 +123,7 @@ header {
 
 .delta, .time span {
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 1.5rem, 1.75rem);
   padding-left: 5px;
   color: white;
 }
@@ -472,14 +472,14 @@ header {
 
 .file-icon {
   display: block;
-  /* width: 17%; */
-  max-width: 4.5rem;
+  width: min(4.5rem, 7vw);
   height: auto;
 }
 
 .no-task-caption {
   display: block;
-  font-size: 1rem;
+  /* font-size: 1rem; */
+  font-size: min(1rem, 1.75vw);
   font-weight: 600;
   color: #BFCDE7;
   padding-top: 10px;
@@ -633,16 +633,23 @@ header {
   }
   .file-icon {
     flex-basis: 10%;
-    max-width: 10%;
+    width: clamp(3.25rem, 8vw, 4.5rem);
   }
   .no-task-caption{
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
   font-weight: 500;
+  }
+  .yellow-container{
+    grid-area: 6 / 6 / span 5 / span 2;
   }
 } 
 
 /* Placeholder styling added. Change styles for this vh */
 @media only screen and (max-height: 845px){
+  .grid-container{
+    list-style: none;
+    overflow-y: auto;
+  }
   .left-box {
     background-color: pink;
   }
