@@ -35,50 +35,58 @@
       </header>
 
       <div class="side-pane">
-        <div class="hamburger-menu"><img class="pane-icon" src="./images/Hamburger-menu.svg" alt="Hamburger menu icon"></div>
-        <div class="home-icon"><img class="pane-icon" src="./images/Home-icon.svg" alt="Home icon"></div>
-        <div class="home-icon-caption">Home</div>
-        <div class="account-icon"><img class="pane-icon" src="./images/Account-icon.svg" alt="Account icon"></div>
-        <div class="account-icon-caption">Account</div>
+        <div class="hamburger-menu">
+          <img class="pane-icon" src="./images/Hamburger-menu.svg" alt="Hamburger menu icon">
+        </div>
+        <div class="home">
+          <img class="home-icon pane-icon" src="./images/Home-icon.svg" alt="Home icon">
+          <div class="home-icon-caption">Home</div>
+        </div>
+        <!-- <div class="home-icon"> -->
+        <div class="account">
+          <img class="account-icon pane-icon" src="./images/Account-icon.svg" alt="Account icon">
+          <div class="account-icon-caption">Account</div>
+        </div>
+        <!-- <div class="account-icon"> -->
       </div>
 
-      <!-- Left section -->
-      <div class="left">
-        <div class="left-grid-container">
-
-          <div class="left-box">
-            <div class="todo-app">
-              <h2>Create a new task<img class="icon" src="./images/Pencil.svg"></h2>
-              <div class="row">
-                  <input type="text" id="task-input-box" name="task-input-box" placeholder="e.g. Learn HTML, CSS and JS">
-                  <button class="task-btn-expanded" onclick="addTask()" value="new-task">Add</button>
+      <div class="left-and-right-container">
+        <!-- Left section -->
+        <!-- <div class="left">
+          <div class="left-grid-container"> -->
+            <div class="left">
+              <div class="todo-app">
+                <h2>Create a new task<img class="icon" src="./images/Pencil.svg"></h2>
+                <div class="row">
+                    <input type="text" id="task-input-box" name="task-input-box" placeholder="e.g. Learn HTML, CSS and JS">
+                    <button class="task-btn-expanded" onclick="addTask()" value="new-task">Add</button>
+                  </div>
+                <div class="details-input-box" contenteditable="true"></div>
+                <div class="minimised-btn-container">
+                  <button class="task-btn-minimised" onclick="addTask()" value="new-task">+</button>
                 </div>
-              <div class="details-input-box" contenteditable="true"></div>
-              <div class="minimised-btn-container">
-                <button class="task-btn-minimised" onclick="addTask()" value="new-task">+</button>
+                <div class="deadline-row">
+                  <span>Deadline:</span>
+                  <input class="deadline" type="date" name="deadline">
+                </div>
               </div>
-              <div class="deadline-row">
-                <span>Deadline:</span>
-                <input class="deadline" type="date" name="deadline">
-              </div>
-            </div>
-          </div> 
-        </div>
-      </div>
+            </div> 
+          <!-- </div>
+        </div> -->
 
-      <!-- Right section -->
-      <div class="right">
-        <div class="right-grid-container">
-          <div id="right-grid-welcome">
-            <div id="welcome-flex-container">
-              <img class="file-icon" src="./images/folder.svg" alt="file icon">
-              <span class="no-task-caption">Yay, no tasks!</span>
+        <!-- Right section -->
+        <div class="right">
+          <!-- <div class="right-grid-container"> -->
+            <div id="right-grid-welcome">
+              <div id="welcome-flex-container">
+                <img class="file-icon" src="./images/folder.svg" alt="file icon">
+                <span class="no-task-caption">Yay, no tasks!</span>
+              </div>
             </div>
+            <ul id="right-list-container"></ul>
           </div>
-          <ul id="right-list-container"></ul>
-        </div>
-      </div> 
-      
+        <!-- </div>  -->
+      </div>
       <!-- Background -->
 
       <div class="green-container">

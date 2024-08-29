@@ -132,22 +132,46 @@ header {
   grid-area: 1 / 1 / span 10 / span 1;
   z-index: 1;
   display: grid;
-  grid-template: repeat(15, 1fr) / 1fr 4fr;
+  grid-template: repeat(15, 1fr) / 1;
   background-color: white;
   border-right: solid gray 2px;
   padding: 5.5rem 1.25rem;
 }
 
-.left {
+.left-and-right-container {
+  grid-area: 2 / 2 / span 9 / span 6;
+  width: 100%;
+  height: 100%;
+  padding: min(7vh, 50px) 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: space-evenly;
+}
+
+/* .left {
   grid-area: 2 / 2 / span 8 / span 3;
   min-width: 350px;
-  /* border: solid gray 2px; */
+  width: clamp(380px, 40vw, 90vw);
+} */
+
+.left {
+  /* grid-area: 2 / 2 / span 6 / span 11; */
+  width: clamp(380px, 40vw, 90vw);
+  height: clamp(280px, 30vh, 480px);
+  background-color: white;
+  padding: 1rem 1.5rem; 
+  border-radius: 15px;
+  margin: 0 min(2.5vw 20px) 0 min(5vw 20px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 2px;
 }
 
 .right {
-  grid-area: 2 / 5 / span 8 / span 3;
-  min-width: 350px;
+  /* grid-area: 2 / 5 / span 8 / span 3;
+  min-width: 350px; */
   /* border: solid gray 2px; */
+  width: clamp(380px, 35vw, 90vw);
+  height: clamp(280px, 35vh, 400px);
 }
 
 .footer {
@@ -202,6 +226,22 @@ header {
   justify-content: center;
 }
 
+.home {
+  grid-area: 3 / 1 / span 1 / span 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: space-between;
+}
+
+.account {
+  grid-area: 4 / 1 / span 1 / span 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: space-between;
+}
+
 .home-icon {
   grid-area: 2 / 1 / span 1 / span 1;
   display: flex;
@@ -243,7 +283,7 @@ header {
 }
 
 /* Left section */
-.left-grid-container {
+/* .left-grid-container {
   display: grid;
   max-width: 100%;
   height: 100%;
@@ -251,18 +291,10 @@ header {
   margin: auto;
   grid-template: repeat(10, 1fr) / repeat(12, 1fr);
   gap: 15px 0;
-}
+} */
 
 /**/
 /* Todo app from here */
-
-.left-box {
-  grid-area: 2 / 2 / span 6 / span 11;
-  background-color: white;
-  border-radius: 15px;
-  padding: 1rem 1.5rem; 
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 2px;
-}
 
 .todo-app {
   /* display: block; */
@@ -408,17 +440,19 @@ header {
 
 
 /* Right section */
-.right-grid-container {
+/* .right-grid-container {
   display: grid;
   max-width: 100%;
   height: 100%;
   position: relative;
   margin: auto;
   grid-template: repeat(10, 1fr) / repeat(12, 1fr);
-}
+} */
 
-#right-grid-welcome {                         /*not made a flex container as isplay property*/
-  grid-area: 2 / 2 / span 8 / span 10;        /* is changed to hidden by JS ('display:flex' overrides the 'display:hidden' style) */
+#right-grid-welcome {                         /*not made a flex container as display property*/
+  /* grid-area: 2 / 2 / span 8 / span 10;       is changed to hidden by JS ('display:flex' overrides the 'display:hidden' style) */
+  width: 100%;
+  height: 100%;
   background-color: white;
   border-radius: 15px;
   position: relative
@@ -428,6 +462,7 @@ header {
 } */
 
 #welcome-flex-container{
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -445,8 +480,8 @@ header {
   /* grid-auto-rows: 2.25rem; */
   grid-auto-columns: 10fr;
   grid-auto-flow: row;
-  list-style: none;
   overflow-y: auto;
+  list-style: none;
   /* Custom scrollbar for Firefox */
   /* scrollbar-color: hsl(219, 45%, 83%) white;
   scrollbar-width: thin; */
@@ -573,6 +608,18 @@ header {
   margin-left: auto;
 }
 
+@media only screen and (max-width: 1024px) {
+  .grid-container{
+    grid-template-columns: 1fr repeat(6, 2fr);
+  }
+  .home-icon-caption, .account-icon-caption {
+    display: hidden;
+  }
+  .left-and-right-container{
+    grid-column: 2 / span 8;
+  }
+}
+
 @media only screen and (max-width: 900px){
   .grid-container{
     grid-template: repeat(11, 1fr) / repeat(7, 1fr);
@@ -585,14 +632,16 @@ header {
     grid-template: repeat(12, 1fr) / 1fr;
     padding: 30% 0;
   }
+  /* .left{
+
+  } */
   .left {
-    grid-area: 2 / 2 / span 4 / span 6;
-  }
-  .left-box {
-    grid-area: 2 / 2 / span 8 / span 10;
+    width: clamp(380px, 40vw, 90vw);
+    height: clamp(280px, 30vh, 480px);
   }
   .right {
-    grid-area: 5 / 2/ span 5 / span 6;
+    width: clamp(380px, 35vw, 90vw);
+    height: clamp(280px, 35vh, 400px);
   }
   .footer {
     grid-area: 11 / 2 / span 1 / span 6;
@@ -650,7 +699,7 @@ header {
     list-style: none;
     overflow-y: auto;
   }
-  .left-box {
+  .left {
     background-color: pink;
   }
 }
