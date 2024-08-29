@@ -34,49 +34,42 @@
         </nav>
       </header>
 
-      <div class="side-pane">
-        <div class="hamburger-menu">
-          <img class="pane-icon" src="./images/Hamburger-menu.svg" alt="Hamburger menu icon">
+      <div class="main-body-container">
+        <div class="side-pane">
+          <div class="hamburger-menu">
+            <img class="pane-icon" src="./images/Hamburger-menu.svg" alt="Hamburger menu icon">
+          </div>
+          <div class="home">
+            <img class="pane-icon" src="./images/Home-icon.svg" alt="Home icon">
+            <span>Home</span>
+          </div>
+          <div class="account">
+            <img class="pane-icon" src="./images/Account-icon.svg" alt="Account icon">
+            <span>Account</span>
+          </div>
         </div>
-        <div class="home">
-          <img class="home-icon pane-icon" src="./images/Home-icon.svg" alt="Home icon">
-          <div class="home-icon-caption">Home</div>
-        </div>
-        <!-- <div class="home-icon"> -->
-        <div class="account">
-          <img class="account-icon pane-icon" src="./images/Account-icon.svg" alt="Account icon">
-          <div class="account-icon-caption">Account</div>
-        </div>
-        <!-- <div class="account-icon"> -->
-      </div>
 
-      <div class="left-and-right-container">
-        <!-- Left section -->
-        <!-- <div class="left">
-          <div class="left-grid-container"> -->
-            <div class="left">
-              <div class="todo-app">
-                <h2>Create a new task<img class="icon" src="./images/Pencil.svg"></h2>
-                <div class="row">
-                    <input type="text" id="task-input-box" name="task-input-box" placeholder="e.g. Learn HTML, CSS and JS">
-                    <button class="task-btn-expanded" onclick="addTask()" value="new-task">Add</button>
-                  </div>
-                <div class="details-input-box" contenteditable="true"></div>
-                <div class="minimised-btn-container">
-                  <button class="task-btn-minimised" onclick="addTask()" value="new-task">+</button>
-                </div>
-                <div class="deadline-row">
-                  <span>Deadline:</span>
-                  <input class="deadline" type="date" name="deadline">
-                </div>
+        <div class="left-and-right-container">
+          <div class="left">
+            <div class="todo-app">
+              <h2>Create a new task<img class="icon" src="./images/Pencil.svg"></h2>
+              <div class="row">
+                <input type="text" id="task-input-box" name="task-input-box" placeholder="e.g. Learn HTML, CSS and JS">
+                <button class="task-btn-expanded" onclick="addTask()" value="new-task">Add</button>
               </div>
-            </div> 
-          <!-- </div>
-        </div> -->
+              <div class="details-input-box" contenteditable="true"></div>
+              <div class="minimised-btn-container">
+                <button class="task-btn-minimised" onclick="addTask()" value="new-task">+</button>
+              </div>
+              <div class="deadline-row">
+                <span>Deadline:</span>
+                <input class="deadline" type="date" name="deadline">
+              </div>
+            </div>
+          </div> 
 
-        <!-- Right section -->
-        <div class="right">
-          <!-- <div class="right-grid-container"> -->
+          <!-- Right section -->
+          <div class="right">
             <div id="right-grid-welcome">
               <div id="welcome-flex-container">
                 <img class="file-icon" src="./images/folder.svg" alt="file icon">
@@ -85,10 +78,10 @@
             </div>
             <ul id="right-list-container"></ul>
           </div>
-        <!-- </div>  -->
+        </div>
       </div>
-      <!-- Background -->
 
+      <!-- Background -->
       <div class="green-container">
         <img src="./images/Green-diffuse-circle.svg" alt="green diffuse circle" id="green-circle">
       </div>
@@ -101,6 +94,8 @@
       <div class="yellow-container">
         <img src="./images/Yellow-diffuse-circle.svg" alt="yellow diffuse circle" id="yellow-circle">
       </div>
+
+      <!-- Footer -->
       <div class="footer">
         <img class="github" src="./images/GitHub-icon.svg" alt="Github icon">
         <div class="footer-credits">Christine Collier / To-do List App</div>
