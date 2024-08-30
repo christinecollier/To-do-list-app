@@ -628,14 +628,8 @@ input:-webkit-autofill:focus {
   .left, .right {
     width: max(350px, 75%);
   }
-  .left {
-    position: -webkit-sticky;  /* for Safari */
-    position: sticky;
-    top: 0;
-  }
   .right {
     flex-shrink: 1;
-    z-index: 1;
   }
   .file-icon {
     display: block;
@@ -678,6 +672,18 @@ input:-webkit-autofill:focus {
   }
 }
 
+@media only screen and (max-width: 480px) {
+  .side-pane {
+    display: flex;
+    height: 20px;
+  }
+  .left-and-right-container {
+    height: 95%;
+  }
+  .right {
+    margin-top: 1.5rem;
+  }
+}
 
 /* @media only screen and (max-width: 900px){
   .grid-container{
