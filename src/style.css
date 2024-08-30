@@ -13,11 +13,15 @@
 :root{
   --main-background-color: #f3f3f3;
   --main-purple-color: #7733ff;
+  --mid-purple-color: #dcccff;
   --light-purple-color: #F4EFFF;
   --main-text-color: #1e3050;
   --footer-color: #e6e6e6;
   --light-grey-color: #f3f3f3;
-  --expand-on-hover: all 1s ease-in-out 0;
+  --dark-grey-color: #e6e6e6;
+  --scale-on-hover: scale(1.1);
+  --expand-on-hover: all 300ms ease 50ms;
+  --darken-on-hover: background-color 400ms ease 50ms; 
 }
 
 html {
@@ -139,14 +143,14 @@ header {
 
 .side-pane {
   height: 100%;
-  width: max(140px, calc(100vw / 7)); 
+  width: max(20%, calc(100vw / 7)); 
   flex-shrink: 1.5;
   display: grid;
   grid-template-rows: repeat(15, 1fr);
   grid-template-columns: clamp(calc(1024px / 13) ,calc(100vw / 7), 200px);
   background-color: white;
   border-right: solid gray 2px;
-  padding: 5vh 1rem;
+  padding: 5vh 2vw; 
   justify-content: start;
 }
 
@@ -309,6 +313,10 @@ header {
   font-size: 0.8rem;
 }
 
+.row, .details-input-box {
+  transition: var(--darken-on-hover);
+}
+
 .row {
   grid-area: 2 / 1 / span 1 / span 2; 
   display: flex;
@@ -321,6 +329,10 @@ header {
   background-color: var(--light-purple-color, #F4EFFF);
   border-radius: 30px;
   padding-left: 1rem;
+}
+
+.row:hover {
+  background-color: var(--mid-purple-color, #dcccff);
 }
 
 #task-input-box {
@@ -348,6 +360,10 @@ header {
   background-color: var(--light-grey-color, #f3f3f3);
   font-size: 0.75rem;
   /* see webkit-line-clamp to limit text input length */
+}
+
+.details-input-box:hover {
+  background-color: var(--dark-grey-color, #e6e6e6)
 }
 
 .details-input-box:focus {
@@ -463,6 +479,10 @@ header {
   transition: var(--expand-on-hover);
 }
 
+#welcome-flex-container:hover {
+  transform: var(--scale-on-hover);
+}
+
 #right-list-container {
   grid-area: 2 / 2 / span 8 / span 10;
   display: grid;
@@ -510,10 +530,6 @@ header {
   font-weight: 600;
   color: #BFCDE7;
   padding-top: 10px;
-}
-
-#welcome-flex-container:hover {
-  transform: scale(1.03)
 }
 
 .task-container {
@@ -601,12 +617,25 @@ header {
 }
 
 @media only screen and (max-width: 922px) {
-  .hamburger-menu img {
-    visibility: visible;
+  .left-and-right-container{
+    grid-column: 2 / span 8;
   }
+  .left, .right {
+    width: 75%;
+  }
+  .yellow-container {
+    grid-area: 6 / 6 / span 4 / span 2;
+  }
+}
+
+@media only screen and (max-width: 768px) {
   .side-pane {
     width: max(70px, calc(100vw / 14)); 
     grid-template-columns: 100%; 
+    padding: 5vh 0;
+  }
+  .hamburger-menu img {
+    visibility: visible;
   }
   .home, .account, .hamburger-menu {
     justify-content: center;
@@ -619,9 +648,6 @@ header {
   .home span, .account span {
     display: hidden;
     font-size: 0;
-  }
-  .left-and-right-container{
-    grid-column: 2 / span 8;
   }
 }
 
