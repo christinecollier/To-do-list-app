@@ -33,6 +33,8 @@ function addTask() {
     document.getElementById("right-grid-welcome").hidden = true;            //Shows welcome picture when task list is empty
   }
   
+  // document.getElementById("task-input-box").textContent = "";
+  // document.getElementsByClassName("details-input-box").value = "";
   
   const taskContainer = document.createElement("li");     //Create a new li called 'taskContainer'
   rightListContainer.appendChild(taskContainer);          //Add 'taskContainer' to rightListContainer
