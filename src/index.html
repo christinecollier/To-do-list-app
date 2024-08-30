@@ -41,6 +41,7 @@
           </div>
           <div class="home">
             <img class="pane-icon" src="./images/Home-icon.svg" alt="Home icon">
+            <span>Home</span>
           </div>
           <div class="account">
             <img class="pane-icon" src="./images/Account-icon.svg" alt="Account icon">
@@ -54,7 +55,9 @@
               <h2>Create a new task<img class="icon" src="./images/Pencil.svg"></h2>
               <div class="row">
                 <input type="text" id="task-input-box" name="task-input-box" placeholder="e.g. Learn HTML, CSS and JS">
-                <button class="task-btn-expanded" onclick="addTask()" value="new-task">Add</button>
+                <div class="expanded-btn-container">
+                  <button class="task-btn-expanded" onclick="addTask()" value="new-task">Add</button>
+                </div>
               </div>
               <div class="details-input-box" contenteditable="true"></div>
               <div class="minimised-btn-container">
@@ -71,7 +74,7 @@
           <div class="right">
             <div id="right-grid-welcome">
               <div id="welcome-flex-container">
-                <img class="file-icon" src="./images/folder.svg" alt="file icon">
+                <img class="file-icon" src="./images/folder.svg" alt="file icon" aria-hidden="true">
                 <span class="no-task-caption">Yay, no tasks!</span>
               </div>
             </div>

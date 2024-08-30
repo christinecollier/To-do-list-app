@@ -109,6 +109,7 @@ header {
   display: flex;
   flex-wrap: nowrap;
   align-items: center; 
+  min-height: 40px; 
 }
 
 .nav-container {
@@ -119,7 +120,7 @@ header {
 } 
 
 .logo {
-  height: 17px;
+  height: max(1.05rem, 2vh);
   width: auto;
 }
 
@@ -129,7 +130,7 @@ header {
 
 .delta, .time span {
   font-weight: 500;
-  font-size: clamp(1.25rem, 1.5rem, 1.75rem);
+  font-size: max(1.25rem, 2.75vh); 
   padding-left: 5px;
   color: white;
 }
@@ -143,7 +144,7 @@ header {
 
 .side-pane {
   height: 100%;
-  width: max(20%, calc(100vw / 7)); 
+  width: min(calc(100vw / 7), 200px); 
   flex-shrink: 1.5;
   display: grid;
   grid-template-rows: repeat(15, 1fr);
@@ -370,20 +371,26 @@ header {
   outline: none;
 }
 
-.task-btn-expanded {
-  grid-area: 2 / 1 / span 1 / span 2; 
-  border: none;
-  outline: none;
-  height: 2rem;
-  padding: 0 1.25rem;
+.expanded-btn-container {
+  grid-area: 2 / 1 / span 1 / span 2;
+  display: flex;
+  justify-content: center;
+  width: clamp(60px, 5vw, 90px); 
+  height: max(2rem, 100%); 
   background-color: var(--main-purple-color, #7733ff);
-  margin-left: auto;
   border-radius: 25px;
-  color: white;
   cursor: pointer;
   justify-self: end;
   align-self: center;
   z-index: 1;
+}
+
+.task-btn-expanded {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
 }
 
 .minimised-btn-container {
@@ -423,8 +430,6 @@ header {
   align-items: center;
   width: 90%;
   height: 1.75rem;
-  /* justify-content: space-between; */
-  /* background-color: gray; */
   padding-left: 0.5rem;
   margin: 20px auto 25px auto;
   color: var(--main-text-color, #1e3050);
@@ -446,28 +451,13 @@ header {
 /* Todo app to here */
 /**/
 
-
-/* Right section */
-/* .right-grid-container {
-  display: grid;
-  max-width: 100%;
-  height: 100%;
-  position: relative;
-  margin: auto;
-  grid-template: repeat(10, 1fr) / repeat(12, 1fr);
-} */
-
-#right-grid-welcome {                         /*not made a flex container as display property*/
-  /* grid-area: 2 / 2 / span 8 / span 10;       is changed to hidden by JS ('display:flex' overrides the 'display:hidden' style) */
-  width: 100%;
-  height: 100%;
+#right-grid-welcome {                  /*not made a flex container as display property*/
+  width: 100%;                         /*is changed to hidden by JS ('display:flex' overrides*/
+  height: 100%;                        /*the 'display:hidden' style)*/
   background-color: white;
   border-radius: 15px;
   position: relative
 }
-/* .removed {
-  opacity: 0;
-} */
 
 #welcome-flex-container{
   width: 100%;
@@ -519,7 +509,7 @@ header {
 
 .file-icon {
   display: block;
-  width: min(4.5rem, 7vw);
+  width: min(4rem, 7vw); 
   height: auto;
 }
 
@@ -622,6 +612,19 @@ header {
   }
   .left, .right {
     width: 75%;
+  }
+  .file-icon {
+    display: block;
+    width: max(4rem, 7vw);  
+    height: auto;
+  }
+  .no-task-caption {
+    display: block;
+    /* font-size: 1rem; */
+    font-size: max(1rem, 1.75vw); 
+    font-weight: 600;
+    color: #BFCDE7;
+    padding-top: 10px;
   }
   .yellow-container {
     grid-area: 6 / 6 / span 4 / span 2;
