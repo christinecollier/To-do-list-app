@@ -25,6 +25,7 @@ setInterval(function(){
 function addTask() {
   const taskInputBox = document.getElementById("task-input-box").value;
   const rightListContainer = document.getElementById("right-list-container");
+  const deadlineInput = document.getElementsByClassName("deadline");
  
   if(document.getElementById("right-list-container").value == "") {
     document.getElementById("right-grid-welcome").hidden = false;           //Hide welcome picture when new task is added
@@ -59,6 +60,10 @@ function addTask() {
 
 
   //Add code here for adding details/deadline infor to taskRow2
+  const deadline = document.createElement("div");
+  taskRow2.appendChild(deadline);
+  deadline.textContent = deadlineInput;
+  deadline.setAttribute('class', 'deadline-output');
 } 
 
 
