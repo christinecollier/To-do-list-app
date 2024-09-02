@@ -25,7 +25,7 @@ setInterval(function(){
 function addTask() {
   const taskInputBox = document.getElementById("task-input-box").value;
   const rightListContainer = document.getElementById("right-list-container");
-  const deadlineInput = document.getElementsByClassName("deadline");
+  const deadlineInput = document.getElementById("deadline").value;
  
   if(document.getElementById("right-list-container").value == "") {
     document.getElementById("right-grid-welcome").hidden = false;           //Hide welcome picture when new task is added
