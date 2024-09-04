@@ -117,7 +117,7 @@ header {
 .nav-container {
   display: flex;
   width: 95vw;
-  justify-content: space-between; 
+  justify-content: flex-start; 
   list-style: none;
 } 
 
@@ -135,6 +135,20 @@ header {
   font-size: max(1.25rem, 2.75vh); 
   padding-left: 5px;
   color: white;
+}
+
+.time {
+  margin-left: auto;
+}
+
+.alternative-menu {
+  display: none;
+  align-self: center;
+  padding-left: 3vw;
+  margin-left: 3vw;
+  border-left: 1px solid white;
+  height: max(1.25rem, 2.5vh); 
+  min-width: calc(1.25rem + 2vw);
 }
 
 .main-body-container {
@@ -236,7 +250,7 @@ header {
   padding-bottom: min(3vh, 35px);
 }
 
-.home:hover, .account:hover, .hamburger-menu img:hover {
+.home:hover, .account:hover, .hamburger-menu img:hover, .alternative-menu img:hover {
   transform: scaleX(1.03);
   cursor: pointer;
 }
@@ -640,15 +654,16 @@ input:-webkit-autofill:focus {
     width: auto;
   }
   .home span, .account span {
-    display: hidden;
-    font-size: 0;
+    display: none;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .side-pane {
+  .alternative-menu {
     display: flex;
-    height: 20px;
+  }
+  .side-pane {
+    display: none;
   }
   .left-and-right-container {
     height: 95%;

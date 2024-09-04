@@ -66,4 +66,6 @@ function addTask() {
   deadline.setAttribute('class', 'deadline-output');
 } 
 
-
+function showSidepane() {
+  document.getElementsByClassName("side-pane").hidden = false;
+}
