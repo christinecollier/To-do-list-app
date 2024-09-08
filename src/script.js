@@ -24,6 +24,7 @@ setInterval(function(){
 // Gets task input and creates a new task as a list item
 function addTask() {
   const taskInputBox = document.getElementById("task-input-box").value;
+  const detailsInputBox = document.getElementById("details-input-box").value;
   const rightListContainer = document.getElementById("right-list-container");
   const deadlineInput = document.getElementById("deadline").value;
  
@@ -60,7 +61,12 @@ function addTask() {
 
 
   //Add code here for adding details/deadline infor to taskRow2
-  const deadline = document.createElement("div");
+  const taskDetails = document.createElement("div");      //Details input box
+  taskRow2.appendChild(taskDetails);                        
+  taskDetails.textContent = detailsInputBox;                
+  taskDetails.setAttribute('class','task-title');           
+
+  const deadline = document.createElement("div");         //Deadline
   taskRow2.appendChild(deadline);
   deadline.textContent = deadlineInput;
   deadline.setAttribute('class', 'deadline-output');

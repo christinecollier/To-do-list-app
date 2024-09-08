@@ -330,7 +330,7 @@ header {
   font-size: var(--small-captions, 0.8rem);
 }
 
-.row, .details-input-box {
+.row, #details-input-box {
   transition: var(--darken-on-hover);
 }
 
@@ -367,14 +367,14 @@ input:-webkit-autofill:focus {
   padding-right: 1rem;
 }
 
-.details-input-box {
+#details-input-box {
   grid-area: 3 / 1 / span 1 / span 2;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   word-wrap: break-word;
   overflow: scroll hidden;
-  overflow-x: hidden;
-  justify-self: center;
+  overflow-x: hidden; */
+  justify-self: center; 
   max-height: 4.5rem;
   width: 90%; 
   padding: 0.5rem 1rem;
@@ -385,11 +385,11 @@ input:-webkit-autofill:focus {
   /* see webkit-line-clamp to limit text input length */
 }
 
-.details-input-box:hover {
+#details-input-box:hover {
   background-color: var(--dark-grey-color, #e6e6e6)
 }
 
-.details-input-box:focus {
+#details-input-box:focus {
   outline: none;
 }
 
