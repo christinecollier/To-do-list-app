@@ -170,7 +170,7 @@ header {
   /* grid-template-columns: clamp(calc(1024px / 13), calc(100vw / 7), 200px);  */
   background-color: white;
   border-right: solid gray 2px;
-  padding: 5vh 2vw; 
+  padding: 5vh 0.25rem; 
   align-items: flex-start;
 }
 
@@ -247,22 +247,40 @@ header {
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  padding-bottom: min(3vh, 35px);
+  /* margin-bottom: min(3vh, 35px); */
+  margin-bottom: 1rem;
 }
 
-.home:hover, .account:hover, .hamburger-menu img:hover, .alternative-menu img:hover {
+.home, .account {
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .home:hover, .account:hover {
+    background-color: var(--light-grey-color);
+    transition: var(--darken-on-hover-instant);
+  }
+}
+
+.hamburger-menu img {
+  margin: 0.5rem 0.5rem;
+}
+
+.hamburger-menu img:hover, .alternative-menu img:hover {
   transform: scaleX(1.03);
   cursor: pointer;
 }
 
-
-.pane-icon, .hamburger-menu img {
+.pane-icon {
   height: 1rem;
   width: auto;
 }
 
 .hamburger-menu img {
-  /* visibility: hidden; */
+  visibility: hidden;
   padding: 0 2px;   /* To equalise width to other pane-icons */
 } 
 
@@ -655,6 +673,11 @@ input:-webkit-autofill:focus {
   }
   .home span, .account span {
     display: none;
+  }
+  .home:hover, .account:hover, .alternative-menu:hover {
+    background-color: none;
+    transform: scaleX(1.03);
+    cursor: pointer;
   }
 }
 
