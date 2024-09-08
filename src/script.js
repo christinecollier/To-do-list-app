@@ -64,7 +64,7 @@ function addTask() {
   const taskDetails = document.createElement("div");      //Details input box
   taskRow2.appendChild(taskDetails);                        
   taskDetails.textContent = detailsInputBox;                
-  taskDetails.setAttribute('class','task-title');           
+  taskDetails.setAttribute('class','task-details');           
 
   const deadline = document.createElement("div");         //Deadline
   taskRow2.appendChild(deadline);
