@@ -367,25 +367,35 @@ input:-webkit-autofill:focus {
   padding-right: 1rem;
 }
 
-#details-input-box {
+.details-input-box-container {
   grid-area: 3 / 1 / span 1 / span 2;
-  /* display: flex;
-  flex-direction: column;
-  word-wrap: break-word;
-  overflow: scroll hidden;
-  overflow-x: hidden; */
   justify-self: center; 
   max-height: 4.5rem;
-  width: 90%; 
-  padding: 0.5rem 1rem;
+  width: 90%;  
+  padding: 0.5rem 0;
   border: none;
   border-radius: 0.8rem;
   background-color: var(--light-grey-color, #f3f3f3);
-  font-size: 0.75rem;
+}
+
+#details-input-box {
+  /* display: flex;
+  flex-direction: column;*/
+  word-wrap: break-word; 
+  overflow: scroll;
+  padding: 0.2rem 1rem;
+  border: none;
+  font-size: 0.7rem;
+  background: transparent;
+  max-width: 100%;
+  min-width: 100%; 
+  max-height: 120%;
+  min-height: 120%;
+  resize: none;
   /* see webkit-line-clamp to limit text input length */
 }
 
-#details-input-box:hover {
+.details-input-box-container:hover {
   background-color: var(--dark-grey-color, #e6e6e6)
 }
 

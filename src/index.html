@@ -63,9 +63,10 @@
                   <button class="task-btn-expanded" onclick="addTask()" value="new-task">Add</button>
                 </div>
               </div>
-              <!-- <div class="details-input-box" contenteditable="true"></div> -->
-              <input type="text" id="details-input-box" name="task-input-box">
-              <div class="minimised-btn-container">
+              <div class="details-input-box-container">
+                <textarea type="text" wrap = "soft" id="details-input-box" name="task-input-box" maxlength="180" placeholder="Give a quick description"></textarea>
+              </div>
+                <div class="minimised-btn-container">
                 <button class="task-btn-minimised" onclick="addTask()" value="new-task">+</button>
               </div>
               <div class="deadline-row">
