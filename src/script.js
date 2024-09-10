@@ -11,15 +11,16 @@ setInterval(function(){
   time();
 },1000);
 
-// let btn = document.querySelector("#task-btn");
-// let welcome = document.querySelector("#right-grid-welcome");
-// btn.addEventListener("click", e => {  
-//   welcome.classList.add("removed");
-// });
-// welcome.addEventListener("transitionend", () => 
-// {
-//   welcome.remove();
-// })
+
+//Side-pane toggle functionality
+const toggleMenu = document.querySelector('.alternative-menu');
+// const closeMenu = document.querySelector('.close-Menu');
+const sidepane = document.querySelector('.side-pane');
+
+toggleMenu.addEventListener("click", function () {
+  sidepane.classList.toggle('show-sidepane');
+});
+
 
 // Gets task input and creates a new task as a list item
 function addTask() {
