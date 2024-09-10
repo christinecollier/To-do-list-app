@@ -34,10 +34,8 @@ function addTask() {
   else{
     document.getElementById("right-grid-welcome").hidden = true;            //Shows welcome picture when task list is empty
   }
-  
-  // document.getElementById("task-input-box").textContent = "";
-  // document.getElementsByClassName("details-input-box").value = "";
-  
+    
+  // rightListContainer.style.display = rightListContainer.style.display === 'none' ? rightListContainer.style.display === 'visible' : rightListContainer.style.display === 'visible';
   const taskContainer = document.createElement("li");     //Create a new li called 'taskContainer'
   rightListContainer.appendChild(taskContainer);          //Add 'taskContainer' to rightListContainer
   taskContainer.setAttribute('class','task-container');   //Set class = task-container

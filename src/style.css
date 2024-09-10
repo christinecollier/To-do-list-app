@@ -156,6 +156,7 @@ header {
   width: 100%;
   height: 100%;
   display: inline-flex;
+  overflow: hidden;
 }
 
 .side-pane {
@@ -195,7 +196,7 @@ header {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 2px;
 }
 
-.right {
+#right {
   /* min-width: 350px;  */
   flex-shrink: 1.5;
   width: clamp(30vw, 35vw, 900px);
@@ -649,10 +650,10 @@ input:-webkit-autofill:focus {
   .left-and-right-container{
     grid-column: 2 / span 8;
   }
-  .left, .right {
+  .left, #right {
     width: max(350px, 75%);
   }
-  .right {
+  #right {
     flex-shrink: 1;
   }
   .file-icon {
@@ -713,7 +714,7 @@ input:-webkit-autofill:focus {
   .left-and-right-container {
     height: 95%;
   }
-  .right {
+  #right {
     margin-top: 1.5rem;
   }
 }
@@ -734,7 +735,7 @@ input:-webkit-autofill:focus {
     width: clamp(380px, 40vw, 90vw);
     height: clamp(280px, 30vh, 480px);
   }
-  .right {
+  #right {
     width: clamp(380px, 35vw, 90vw);
     height: clamp(280px, 35vh, 400px);
   }
