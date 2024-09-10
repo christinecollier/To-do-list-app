@@ -14,12 +14,25 @@ setInterval(function(){
 
 //Side-pane toggle functionality
 const toggleMenu = document.querySelector('.alternative-menu');
-// const closeMenu = document.querySelector('.close-Menu');
 const sidepane = document.querySelector('.side-pane');
 
 toggleMenu.addEventListener("click", function () {
-  sidepane.classList.toggle('show-sidepane');
+  sidepane.classList.toggle("show-sidepane");
 });
+
+
+// var btn = document.querySelector('.alternative-menu');
+// var btnst = true;
+// btn.onclick = function() {
+//   if(btnst == true) {
+//     document.getElementById('side-pane').classList.add('show-sidepane');
+//     btnst = false;
+//   }else if(btnst == false) {
+//     document.getElementById('side-pane').classList.remove('show-sidepane');
+//     btnst = true;
+//   }
+// }
+
 
 
 // Gets task input and creates a new task as a list item

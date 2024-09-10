@@ -108,7 +108,6 @@ header {
   z-index: 1;
   background-color: var(--main-purple-color,#7733ff);
   padding: 5px 3%;
-  z-index: 2;
   display: flex;
   flex-wrap: nowrap;
   align-items: center; 
@@ -183,6 +182,7 @@ header {
   border-right: solid gray 2px;
   padding: 5vh 0.25rem; 
   align-items: flex-start;
+  z-index: 1;
 }
 
 .left-and-right-container {
@@ -714,7 +714,6 @@ input:-webkit-autofill:focus {
     cursor: pointer;
   }
 }
-
 @media only screen and (max-width: 480px) {
   .separator {
     display: flex;
@@ -732,7 +731,7 @@ input:-webkit-autofill:focus {
     transition: all 600ms ease 5ms;
   }
   .show-sidepane {
-    transform: translate(0)
+    transform: translate(0);
   }
   .left-and-right-container {
     height: 95%;
