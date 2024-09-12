@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>To-do List App</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
@@ -60,9 +59,7 @@
               <h2>Create a new task<img class="icon" src="./images/Pencil.svg"></h2>
               <div class="row">
                 <input type="text" id="task-input-box" name="task-input-box" placeholder="e.g. Learn HTML, CSS and JS">
-                <div class="expanded-btn-container">
-                  <button class="task-btn-expanded" onclick="addTask()" value="new-task">Add</button>
-                </div>
+                <button class="task-btn-expanded" value="new-task">Add</button>
               </div>
               <div class="details-input-box-container">
                 <textarea type="text" wrap = "soft" id="details-input-box" name="task-input-box" maxlength="130" placeholder="Give a quick description"></textarea>
@@ -110,5 +107,6 @@
         <div class="footer-credits">Christine Collier / To-do List App</div>
       </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>

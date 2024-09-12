@@ -412,7 +412,7 @@ input:-webkit-autofill:focus {
   outline: none;
 }
 
-.expanded-btn-container {
+/* .expanded-btn-container {
   grid-area: 2 / 1 / span 1 / span 2;
   display: flex;
   justify-content: center;
@@ -424,12 +424,20 @@ input:-webkit-autofill:focus {
   justify-self: end;
   align-self: center;
   z-index: 1;
-}
+} */
 
 .task-btn-expanded {
+  grid-area: 2 / 1 / span 1 / span 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: clamp(60px, 5vw, 90px); 
+  height: max(2rem, 100%); 
+  border-radius: 25px;
+  z-index: 1;
   border: none;
   outline: none;
-  background-color: transparent;
+  background-color: var(--main-purple-color, #7733ff);
   color: white;
   cursor: pointer;
 }
