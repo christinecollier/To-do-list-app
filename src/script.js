@@ -40,8 +40,14 @@ const taskInput = document.getElementById("task-input-box");
 const detailsInput = document.getElementById("details-input-box");
 const deadlineInput = document.getElementById("deadline");
 const addButton = document.querySelector(".task-btn-expanded");
+const welcomeRight = document.getElementById("right-grid-welcome");
 const todoList = document.getElementById("right-list-container");
 // const deleteButton = document.querySelector(".delete-btn");
+
+//Remove RHS welcome when task container is not empty.
+if (todoList !== "") {
+  welcomeRight.style.display = 'none';    
+}
 
 //Initialize 
 document.addEventListener("DOMContentLoaded", function() {        //Listen to events on the entire loaded DOM content
@@ -85,11 +91,21 @@ function addTask() {
 
 function deleteAllTasks() {
   // some logic
+  //Display RHS welcome when task container is empty.
+  // if (todoList === "") {
+  //   welcomeRight.style.display = 'block';    
+  // }
 }
 
 function displayTasks() {
   todoList.innerHTML = "";
   todo.forEach((item, index) => {
+    if (item['task-description'] !== "" && item['task-description'].length > 78) {
+      const shortTaskDescription = `${item['task-description'].slice(0, 75)}...`;
+      console.log(shortTaskDescription);
+      todo[index]['shorter-description'] = shortTaskDescription;
+    }
+    
     const taskContainer = document.createElement("li"); 
     taskContainer.innerHTML = `
       <div class="task-container">
