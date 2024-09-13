@@ -210,7 +210,7 @@ header {
   /* min-width: 350px;  */
   flex-shrink: 1.5;
   width: clamp(30vw, 35vw, 900px);
-  height: clamp(280px, 35vh, 400px);
+  height: clamp(355px, 100%, 622px);
   margin: 0 min(2.5vw 20px) 0 min(5vw 20px);
 }
 
@@ -512,7 +512,7 @@ input:-webkit-autofill:focus {
 
 #right-grid-welcome {                  /*not made a flex container as display property*/
   width: 100%;                         /*is changed to hidden by JS ('display:flex' overrides*/
-  height: 100%;                        /*the 'display:hidden' style)*/
+  height: clamp(280px, 35vh, 400px);                        /*the 'display:hidden' style)*/
   background-color: white;
   border-radius: 15px;
   position: relative
@@ -711,6 +711,7 @@ input[type="checkbox"]:checked::before {
   }
   #right {
     flex-shrink: 1;
+    margin-top: 1.5rem;
   }
   .file-icon {
     display: block;

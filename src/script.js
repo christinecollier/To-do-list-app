@@ -13,12 +13,12 @@ setInterval(function(){
 
 
 //Side-pane toggle functionality
-const toggleMenu = document.querySelector('.alternative-menu');
-const sidepane = document.querySelector('.side-pane');
+// const toggleMenu = document.querySelector('.alternative-menu');
+// const sidepane = document.querySelector('.side-pane');
 
-toggleMenu.addEventListener("click", function () {
-  sidepane.classList.toggle("show-sidepane");
-});
+// toggleMenu.addEventListener("click", function () {
+//   sidepane.classList.toggle("show-sidepane");
+// });
 
 
 // var btn = document.querySelector('.alternative-menu');
@@ -45,8 +45,12 @@ const todoList = document.getElementById("right-list-container");
 // const deleteButton = document.querySelector(".delete-btn");
 
 //Remove RHS welcome when task container is not empty.
-if (todoList !== "") {
-  welcomeRight.style.display = 'none';    
+function checkWelcomeRight() {
+  if (todoList !== "") {
+    welcomeRight.style.display = 'none';    
+  } else {
+    welcomeRight.style.display = 'flex';
+  }
 }
 
 //Initialize 
@@ -76,33 +80,26 @@ function addTask() {
     saveToLocalStorage();                                        //A (not in-built) function that saves to local storage
     taskInput.value = "";
     detailsInput.value = "";
-
-    // let currentDate = new Date();
-    // date.innerHTML = currentDate.getDate();
-    // month.innerHTML = currentDate.getMonth();
-    // year.innerHtml = currentDate.getFullYear();
-    // deadlineInput.value = `${date}/${month}/${year}`;
-    deadlineInput.value = "";
     displayTasks();
+    checkWelcomeRight();
   } else {
-    alert("Please enter a task.");
+    alert("Enter a title for your task.");
   }
 }
 
 function deleteAllTasks() {
   // some logic
-  //Display RHS welcome when task container is empty.
-  // if (todoList === "") {
-  //   welcomeRight.style.display = 'block';    
-  // }
+  checkWelcomeRight();
 }
 
 function displayTasks() {
   todoList.innerHTML = "";
   todo.forEach((item, index) => {
-    if (item['task-description'] !== "" && item['task-description'].length > 78) {
-      const shortTaskDescription = `${item['task-description'].slice(0, 75)}...`;
-      console.log(shortTaskDescription);
+    if (item['task-description'] === "") {
+      let shortTaskDescription = " ";
+      todo[index]['shorter-description'] = shortTaskDescription;
+    } else if (item['task-description'] !== "" && item['task-description'].length > 72) {
+      let shortTaskDescription = `${item['task-description'].slice(0, 68)}...`;
       todo[index]['shorter-description'] = shortTaskDescription;
     }
     
@@ -117,7 +114,7 @@ function displayTasks() {
         </div>
         <div class="task-row-2">
           <div id="description-${index}" class="task-details ${item.disabled ? ".disabled-caption" : ""}" onclick="editTask(${index})">
-            ${item['task-description']};
+            ${item['shorter-description']};
           </div>
           <div id="date-${index}" class="deadline-output ${item.disabled ? ".disabled-caption" : ""}" onclick="editTask(${index}])">
           ${item.deadline};
@@ -132,6 +129,12 @@ function displayTasks() {
   });
 }
 
+function toggleTask(index) {
+  todo[index].disabled = !todo[index].disabled;
+  saveToLocalStorage();
+  displayTasks();
+}
+
 function saveToLocalStorage() {
   localStorage.setItem("todo", JSON.stringify(todo));
 }
@@ -139,6 +142,10 @@ function saveToLocalStorage() {
 function editTask() {
   // some logic
 }
+
+if (todoList === "") {
+  welcomeRight.style.display = 'block'; 
+} 
 
 // // Gets task input and creates a new task as a list item
 // function addTask() {
