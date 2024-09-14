@@ -111,7 +111,6 @@ header {
   display: flex;
   flex-wrap: nowrap;
   align-items: center; 
-  min-width: 380px;
   min-height: 40px; 
 }
 
@@ -510,9 +509,9 @@ input:-webkit-autofill:focus {
 /* Todo app to here */
 /**/
 
-#right-grid-welcome {                  /*not made a flex container as display property*/
-  width: 100%;                         /*is changed to hidden by JS ('display:flex' overrides*/
-  height: clamp(280px, 35vh, 400px);                        /*the 'display:hidden' style)*/
+#right-grid-welcome {                   /*not made a flex container as display property*/
+  width: 100%;                          /*is changed to hidden by JS ('display:flex' overrides*/
+  height: clamp(280px, 35vh, 400px);    /*the 'display:hidden' style)*/
   background-color: white;
   border-radius: 15px;
   position: relative
@@ -532,16 +531,27 @@ input:-webkit-autofill:focus {
   transform: var(--scale-on-hover);
 }
 
+.file-icon {
+  display: block;
+  width: min(4rem, 7vw); 
+  height: auto;
+}
+
+.no-task-caption {
+  display: block;
+  /* font-size: 1rem; */
+  font-size: min(1rem, 1.75vw);
+  font-weight: 600;
+  color: #BFCDE7;
+  padding-top: 10px;
+}
+
 #right-list-container {
   grid-area: 2 / 2 / span 8 / span 10;
-  /* display: grid;
-  grid-template: repeat(10, 1fr) / 1fr;
-  gap: 15px 0; */
+  display: flex;
+  flex-wrap: wrap;
   min-height: 2rem;
   height: 100%;
-  /* grid-auto-rows: 2.25rem; */
-  /* grid-auto-columns: 10fr;
-  grid-auto-flow: row; */
   overflow-y: auto;
   list-style: none;
   /* Custom scrollbar for Firefox */
@@ -565,25 +575,23 @@ input:-webkit-autofill:focus {
 *::-webkit-scrollbar-thumb:hover {
   background-color: 	hsl(219, 45%, 73%);
 }
-/* Custom scrollbar to here */
 
-.file-icon {
-  display: block;
-  width: min(4rem, 7vw); 
-  height: auto;
+@media (min-width: 1600px) {
+  #right-list-container {
+    justify-content: space-between;
+    align-content: flex-start;
+  }
+  #right #right-list-container li {
+    width: min(48%, 324px);
+  }
 }
 
-.no-task-caption {
-  display: block;
-  /* font-size: 1rem; */
-  font-size: min(1rem, 1.75vw);
-  font-weight: 600;
-  color: #BFCDE7;
-  padding-top: 10px;
+#right-list-container li {
+  width: 100%;
 }
 
 .task-container {
-  width: 100%;
+  display: flex inline-block;
   height: clamp(4rem, 8vh, 5rem);
   display: flex;
   flex-wrap: wrap;
@@ -601,9 +609,9 @@ input:-webkit-autofill:focus {
 
 .task-row-1, .task-row-2 {
   width: 100%;
-  display: flex;
+  display: inline-flex;
   margin: 0.1rem 0;
-  flex-wrap: inline-flex; 
+  flex-wrap: nowrap; 
   align-items: center;
 }
 

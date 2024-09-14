@@ -149,51 +149,12 @@ if (todoList === "") {
 
 // // Gets task input and creates a new task as a list item
 // function addTask() {
-//   const taskInputBox = document.getElementById("task-input-box").value;
-//   const detailsInputBox = document.getElementById("details-input-box").value;
-//   const rightListContainer = document.getElementById("right-list-container");
-//   const deadlineInput = document.getElementById("deadline").value;
- 
 //   if(document.getElementById("right-list-container").value == "") {
-//     document.getElementById("right-grid-welcome").hidden = false;           //Hide welcome picture when new task is added
+//     document.getElementById("right-grid-welcome").hidden = false;
 //   }
-//   else{
-//     document.getElementById("right-grid-welcome").hidden = true;            //Shows welcome picture when task list is empty
+//   else{ 
+//     document.getElementById("right-grid-welcome").hidden = true;
 //   }
-    
-//   // rightListContainer.style.display = rightListContainer.style.display === 'none' ? rightListContainer.style.display === 'visible' : rightListContainer.style.display === 'visible';
-//   const taskContainer = document.createElement("li");     //Create a new li called 'taskContainer'
-//   rightListContainer.appendChild(taskContainer);          //Add 'taskContainer' to rightListContainer
-//   taskContainer.setAttribute('class','task-container');   //Set class = task-container
-
-//   const taskRow1 = document.createElement("div");        
-//   taskContainer.appendChild(taskRow1);          
-//   taskRow1.setAttribute('class','task-row-1');   
-
-//   const taskRow2 = document.createElement("div");        
-//   taskContainer.appendChild(taskRow2);          
-//   taskRow2.setAttribute('class','task-row-2');   
-  
-//   const checkCircle = document.createElement("div");      //Create checkCircle as div
-//   taskRow1.appendChild(checkCircle);                      //Add the checkCircle to the rightListContainer
-//   checkCircle.setAttribute('class','check-circle')        //Set class of new div to 'check-circle'
-
-//   const taskTitle = document.createElement("div");        //Create a new div called 'task'
-//   taskRow1.appendChild(taskTitle);                        //Add 'task' to rightListContainer
-//   taskTitle.textContent = taskInputBox;                   //Set content of 'task' to whatever is in the input box
-//   taskTitle.setAttribute('class','task-title');           //Set class
-
-
-//   //Add code here for adding details/deadline infor to taskRow2
-//   const taskDetails = document.createElement("div");      //Details input box
-//   taskRow2.appendChild(taskDetails);                        
-//   taskDetails.textContent = detailsInputBox;                
-//   taskDetails.setAttribute('class','task-details');           
-
-//   const deadline = document.createElement("div");         //Deadline
-//   taskRow2.appendChild(deadline);
-//   deadline.textContent = deadlineInput;
-//   deadline.setAttribute('class', 'deadline-output');
 // } 
 
 // function showSidepane() {
