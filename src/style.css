@@ -554,6 +554,7 @@ input:-webkit-autofill:focus {
   height: 100%;
   overflow-y: auto;
   list-style: none;
+  align-content: flex-start;
   /* Custom scrollbar for Firefox */
   /* scrollbar-color: hsl(219, 45%, 83%) white;
   scrollbar-width: thin; */
@@ -579,7 +580,7 @@ input:-webkit-autofill:focus {
 @media (min-width: 1600px) {
   #right-list-container {
     justify-content: space-between;
-    align-content: flex-start;
+    transition: width 600ms ease 50ms;
   }
   #right #right-list-container li {
     width: min(48%, 324px);
@@ -595,7 +596,7 @@ input:-webkit-autofill:focus {
   height: clamp(4rem, 8vh, 5rem);
   display: flex;
   flex-wrap: wrap;
-  padding: 0.35rem 10px 0.5rem 10px;
+  padding: 0.5rem 10px;
   margin-bottom: 0.8rem;
   user-select: none;
   border-radius: 15px;
@@ -627,10 +628,11 @@ input:-webkit-autofill:focus {
 .disabled {
   display: flex;
   text-decoration: line-through;
+  color: grey;
 }
 
 .disabled-caption {
-  color: var(--light-grey-color, #f3f3f3);
+  color: grey;
 }
 
 input[type="checkbox"] {
@@ -680,6 +682,8 @@ input[type="checkbox"]:checked::before {
 
 .task-details {
   font-size: 0.7rem;
+  overflow: hidden;
+  max-height: 1.85rem;
 }
 
 .deadline-output {
@@ -688,6 +692,22 @@ input[type="checkbox"]:checked::before {
   padding-right: 0.1rem;
   min-width: fit-content;
   padding-left: 0.5rem;
+}
+
+.delete-button {
+  height: 1rem;
+  width: 0.9rem;
+  display: flex;
+  align-items: center;
+  /* padding: 0.15rem; */
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.bin-icon {
+  width: 0.65rem;
+  height: 0.7rem;
 }
 
 .icon {
@@ -733,6 +753,11 @@ input[type="checkbox"]:checked::before {
     font-weight: 600;
     color: #BFCDE7;
     padding-top: 10px;
+  }
+  #right-list-container {
+    min-height: 2rem;
+    height: 55%;
+    overflow-y: auto;
   }
   .green-container {
     grid-area: 1 / 2 / span 5 / span 2;

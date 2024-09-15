@@ -42,14 +42,17 @@ const deadlineInput = document.getElementById("deadline");
 const addButton = document.querySelector(".task-btn-expanded");
 const welcomeRight = document.getElementById("right-grid-welcome");
 const todoList = document.getElementById("right-list-container");
-// const deleteButton = document.querySelector(".delete-btn");
+// const deleteButton = document.querySelector(".delete-button");
 
 //Remove RHS welcome when task container is not empty.
 function checkWelcomeRight() {
-  if (todoList !== "") {
-    welcomeRight.style.display = 'none';    
-  } else {
-    welcomeRight.style.display = 'flex';
+  todo.length === 0 ? '' : welcomeRight.style.display = 'none'; 
+}
+
+function changeTaskContainerWidth() {
+  let taskListItem = document.getElementsByClassName("task-list-item");
+  if (todo.length > 1) {
+    taskListItem.classList.add('narrow');
   }
 }
 
@@ -60,10 +63,13 @@ document.addEventListener("DOMContentLoaded", function() {        //Listen to ev
     if (event.key === "Enter") {
       event.preventDefault()                                      //Prevent the 'Enter' btn triggering a page reload/other default behaviour
       addTask();                                                  //Call the 'addTask' function
+      checkWelcomeRight();
     }
   });
-  // deleteButton.addEventListener("click", deleteAllTasks);
+  // deleteButton.addEventListener("click", deleteTask);
   displayTasks();
+  checkWelcomeRight();
+  changeTaskContainerWidth();
 }); 
 
 function addTask() {
@@ -87,9 +93,9 @@ function addTask() {
   }
 }
 
-function deleteAllTasks() {
+function deleteTask() {
   // some logic
-  checkWelcomeRight();
+  // checkWelcomeRight();
 }
 
 function displayTasks() {
@@ -119,6 +125,9 @@ function displayTasks() {
           <div id="date-${index}" class="deadline-output ${item.disabled ? ".disabled-caption" : ""}" onclick="editTask(${index}])">
           ${item.deadline};
           </div>
+          <button id="delete=${index}" class="delete-button ${item.disabled ? "disabled-caption" : ""}" onclick="deleteTask(${index})">
+            <img class="bin-icon" src="${item.disabled ? "./images/bin-inactive.svg" : "./images/bin-active.svg"}"" alt="delete">
+          </button>
         </div>
       </div>
     `;
@@ -131,6 +140,12 @@ function displayTasks() {
 
 function toggleTask(index) {
   todo[index].disabled = !todo[index].disabled;
+  saveToLocalStorage();
+  displayTasks();
+}
+
+function deleteTask(index) {
+  todo.splice(index, 1);
   saveToLocalStorage();
   displayTasks();
 }
