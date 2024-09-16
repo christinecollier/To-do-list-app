@@ -66,20 +66,16 @@
                 <div class="details-input-box-container">
                   <textarea type="text" wrap = "soft" id="details-input-box" name="task-input-box" maxlength="130" placeholder="Give a quick description"></textarea>
                 </div>
-                  <div class="minimised-btn-container">
-                  <button class="task-btn-minimised" onclick="addTask()" value="new-task">+</button>
+                <div class="priority-row">
+                  <input type="radio" value="high-priority" name="priority" >
+                  <input type="radio" value="mid-priority" name="priority">
+                  <input type="radio" value="low-priority" name="priority">
                 </div>
-                <div class="priority-deadline">
-                  <!-- <div class="priority-row">
-                    <input type="radio" value="high-priority" name="priority">
-                    <input type="radio" value="mid-priority" name="priority">
-                    <input type="radio" value="low-priority" name="priority">
-                  </div> -->
-                  <div class="deadline-row">
-                    <span>Deadline:</span>
-                    <input id="deadline" type="date" name="deadline">
-                  </div>
+                <div class="deadline-row">
+                  <span>Deadline:</span>
+                  <input id="deadline" type="date" name="deadline">
                 </div>
+                <button class="task-btn-minimised" onclick="addTask()" value="new-task">+</button>
               </div>
             </div> 
           </div>
