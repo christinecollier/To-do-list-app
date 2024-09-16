@@ -38,6 +38,7 @@ let todo = JSON.parse(localStorage.getItem("todo")) || [];         //Turns strin
 
 const taskInput = document.getElementById("task-input-box");
 const detailsInput = document.getElementById("details-input-box");
+// const priorityInput = document.getElementById("priority-row")
 const deadlineInput = document.getElementById("deadline");
 const addButton = document.querySelector(".task-btn-expanded");
 const welcomeRight = document.getElementById("right-grid-welcome");
@@ -69,17 +70,18 @@ document.addEventListener("DOMContentLoaded", function() {        //Listen to ev
   // deleteButton.addEventListener("click", deleteTask);
   displayTasks();
   checkWelcomeRight();
-  changeTaskContainerWidth();
 }); 
 
 function addTask() {
   const newTask = taskInput.value.trim();                         //Extract task title input + remove trailing white-space
   const newTaskDetails = detailsInput.value.trim();
+  // const priority = priorityInput.value;
   const deadline = deadlineInput.value;
   if (newTask !== "") {                                           //If the task input is not blank
     todo.push({
       'task-title': newTask,
       'task-description': newTaskDetails,
+      // 'task-priority': priority,
       deadline: deadline,
       disabled: false                                             //Every new task is enabled by default
     });
@@ -88,6 +90,7 @@ function addTask() {
     detailsInput.value = "";
     displayTasks();
     checkWelcomeRight();
+    // closeEditTask()
   } else {
     alert("Enter a title for your task.");
   }
@@ -110,24 +113,22 @@ function displayTasks() {
     }
     
     const taskContainer = document.createElement("li"); 
+    taskContainer.setAttribute('class', 'task-list-item')
     taskContainer.innerHTML = `
-      <div class="task-container">
+      <div class="task-container" onclick="viewTask(${index})">
         <div class="task-row-1">
           <input type="checkbox" class="check-circle" id="input-${index}" ${item.disabled ? "checked" : ""}>
           <div id="todo-${index}" class="task-title ${item.disabled ? "disabled" : ""}" onclick="editTask(${index})">
-            ${item['task-title']};
+            ${item['task-title']}
           </div>
         </div>
         <div class="task-row-2">
           <div id="description-${index}" class="task-details ${item.disabled ? ".disabled-caption" : ""}" onclick="editTask(${index})">
-            ${item['shorter-description']};
+            ${item['shorter-description']}
           </div>
           <div id="date-${index}" class="deadline-output ${item.disabled ? ".disabled-caption" : ""}" onclick="editTask(${index}])">
-          ${item.deadline};
+          ${item.deadline}
           </div>
-          <button id="delete=${index}" class="delete-button ${item.disabled ? "disabled-caption" : ""}" onclick="deleteTask(${index})">
-            <img class="bin-icon" src="${item.disabled ? "./images/bin-inactive.svg" : "./images/bin-active.svg"}"" alt="delete">
-          </button>
         </div>
       </div>
     `;
@@ -144,6 +145,10 @@ function toggleTask(index) {
   displayTasks();
 }
 
+function saveTask(index) {
+  //some logic
+}
+
 function deleteTask(index) {
   todo.splice(index, 1);
   saveToLocalStorage();
@@ -153,7 +158,56 @@ function deleteTask(index) {
 function saveToLocalStorage() {
   localStorage.setItem("todo", JSON.stringify(todo));
 }
-  
+
+function viewTask(index) {
+  const wholeDocument = document.querySelector('.grid-container');
+  const leftContainer = document.querySelector('.left-container')
+  const blurFilter = document.createElement('div');
+  blurFilter.setAttribute('class', 'blur-filter');
+
+  let editTaskContainerDocked = document.createElement('div');
+  editTaskContainerDocked.setAttribute('class', 'edit-task-container-docked');
+  let editTaskContainerModal = document.createElement('div'); 
+  editTaskContainerModal.setAttribute('class', 'edit-task-container-modal');
+
+  wholeDocument.appendChild(blurFilter);
+  leftContainer.appendChild(editTaskContainerDocked);
+  blurFilter.appendChild(editTaskContainerModal);
+
+  todo.forEach((item, index) => {
+    let taskTitle = item['task-title'];
+    let taskDescription = item['task-description'];
+    // let taskPriority = item['task-priority'];
+    let deadline = item.deadline;
+
+    editTaskContainerDocked.innerHTML = `
+    <div class="edit-task-title">
+      ${taskTitle}
+    </div>
+    <div class="edit-task-description">
+      ${taskDescription}
+    </div>
+    <div class="edit-deadline">
+      Deadline: ${deadline}
+    </div>
+    <button id="save-${index}" class="save-button" onclick="saveTask(${index})">
+      Save
+    </button>
+    <button id="delete-${index}" class="delete-button" onclick="deleteTask(${index})">
+      Delete
+    </button>
+    </div>
+    `;
+    editTaskContainerModal.innerHTML = editTaskContainerDocked.innerHTML;
+  });
+}
+
+function closeEditTask() {
+  //if mouse clicks 'close' button or task is 'saved'
+  //remove the container from the DOM
+  // editTaskContainer.remove();
+}
+
 function editTask() {
   // some logic
 }

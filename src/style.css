@@ -24,6 +24,7 @@
   --darken-on-hover-instant: background-color 400ms ease 0; 
   --darken-on-hover: background-color 400ms ease 50ms; 
   --small-captions: 0.8rem;
+  --left-and-right-height: clamp(355px, 100%, 622px);
 }
 
 html {
@@ -181,7 +182,7 @@ header {
   border-right: solid gray 2px;
   padding: 5vh 0.25rem; 
   align-items: flex-start;
-  z-index: 1;
+  z-index: 2;
 }
 
 .left-and-right-container {
@@ -195,13 +196,17 @@ header {
   justify-content: space-evenly;
 }
 
+.left-container {
+  width: clamp(380px, 40vw, 900px);
+  height: var(--left-and-right-height, clamp(355px, 100%, 622px));
+}
+
 .left {
   width: clamp(380px, 40vw, 900px);
   height: clamp(280px, 30vh, 480px);
   background-color: white;
   padding: 1rem 1.5rem; 
   border-radius: 15px;
-  margin: 0 min(2.5vw 20px) 0 min(5vw 20px);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 2px;
 }
 
@@ -209,8 +214,7 @@ header {
   /* min-width: 350px;  */
   flex-shrink: 1.5;
   width: clamp(30vw, 35vw, 900px);
-  height: clamp(355px, 100%, 622px);
-  margin: 0 min(2.5vw 20px) 0 min(5vw 20px);
+  height: var(--left-and-right-height, clamp(355px, 100%, 622px));
 }
 
 .footer {
@@ -472,14 +476,26 @@ input:-webkit-autofill:focus {
   padding-left: 0.05rem;
 }
 
-.deadline-row{
+.priority-deadline {
   grid-area: 4 / 1 / span 1 / span 2;
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  /* height: 1.75rem; */
+  align-items: flex-start;
+  padding-left: 0.5rem;
+}
+
+.priority-row {
+  width: 100%;
+  align-self: flex-start;
+  height: 1rem;
+}
+
+.deadline-row{
+  align-self: flex-end;
   align-items: center;
   width: 90%;
-  height: 1.75rem;
-  padding-left: 0.5rem;
-  margin: 20px auto 25px auto;
   color: var(--main-text-color, #1e3050);
 }
 
@@ -694,15 +710,99 @@ input[type="checkbox"]:checked::before {
   padding-left: 0.5rem;
 }
 
-.delete-button {
-  height: 1rem;
-  width: 0.9rem;
+.blur-filter {
+  grid-area: 1 / 1 / span 10 / span 7;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255,255,255,0.2);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+  display: none;
+}
+
+.edit-task-container-docked, .edit-task-container-modal {
+  width: clamp(380px, 40vw, 900px);
+  height: clamp(280px, 30vh, 480px);
+  background-color: white;
+  padding: 1rem 1.5rem; 
+  border: 2px solid var(--mid-purple-color);
+  border-radius: 15px;
+  margin-top: 2rem;
+  box-shadow: rgba(119, 51, 255, 0.1) 5px 5px 2px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.edit-task-container-docked {
+  align-self: end;
+}
+
+.hidden {
+  display: none;
+}
+
+.edit-task-title, .edit-task-description {
   display: flex;
   align-items: center;
-  /* padding: 0.15rem; */
-  border: none;
-  background: transparent;
+  width: 100%;
+}
+
+.edit-task-description, .edit-priority, .edit-deadline {
+  font-size: var(--small-captions, 0.8rem);
+}
+
+.edit-task-title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.edit-task-description {
+  align-items: flex-start;
+  height: clamp(1rem, 1.5rem, 4rem);
+  margin: 0.5rem 0 1rem 0;
+}
+
+.edit-priority {
+  width: 2rem;
+}
+
+.edit-deadline {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 0.5rem 0;
+}
+
+.save-button, .delete-button {
+  height: 1.75rem;
+  width: clamp(60px, 5vw, 90px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  font-size: var(--small-captions);
+  font-weight: 600;
   cursor: pointer;
+}
+
+.save-button {
+  border: none;
+  background: var(--light-grey-color);
+  color: var(--main-purple-color, #7733ff);
+  margin: auto 0.5rem 0 auto;
+}
+
+.delete-button {
+  border: 2px solid var(--main-purple-color, #7733ff);
+  margin-top: auto;
+  background: transparent;
+  color: var(--main-purple-color, #7733ff);
 }
 
 .bin-icon {
@@ -737,6 +837,15 @@ input[type="checkbox"]:checked::before {
   .left, #right {
     width: max(350px, 75%);
   }
+  .left-container{
+    width: 100%;
+    height: clamp(280px, 30vh, 480px);
+    display: flex;
+    justify-content: center;
+  }
+  .edit-task-container-docked {
+    display: none;
+  }
   #right {
     flex-shrink: 1;
     margin-top: 1.5rem;
@@ -758,6 +867,11 @@ input[type="checkbox"]:checked::before {
     min-height: 2rem;
     height: 55%;
     overflow-y: auto;
+  }
+  .blur-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .green-container {
     grid-area: 1 / 2 / span 5 / span 2;
