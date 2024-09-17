@@ -333,7 +333,6 @@ header {
 }
 
 .todo-app h2 {
-  grid-area: 1 / 1 / span 1 / span 2; 
   display: flex;
   align-items: center;
   color: inherit;
@@ -378,6 +377,21 @@ input:-webkit-autofill:focus {
   padding-right: 1rem;
 }
 
+.task-btn-expanded {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: clamp(60px, 5vw, 90px); 
+  height: max(2rem, 100%); 
+  border-radius: 25px;
+  z-index: 1;
+  border: none;
+  outline: none;
+  background-color: var(--main-purple-color, #7733ff);
+  color: white;
+  cursor: pointer;
+}
+
 .details-input-box-container {
   justify-self: center; 
   max-height: 4.5rem;
@@ -411,51 +425,80 @@ input:-webkit-autofill:focus {
   outline: none;
 }
 
-.task-btn-expanded {
-  grid-area: 2 / 1 / span 1 / span 2;
+.priority-row {
+  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: clamp(60px, 5vw, 90px); 
-  height: max(2rem, 100%); 
-  border-radius: 25px;
-  z-index: 1;
-  border: none;
-  outline: none;
-  background-color: var(--main-purple-color, #7733ff);
-  color: white;
-  cursor: pointer;
+}
+
+.priority-row label {
+  height: 1.25rem;
+  width: 1.25rem;
+  position: relative;
+}
+
+.priority-row svg {
+  fill: white;
 }
 
 input[type="radio"] {
   appearance: none;
-  border: none; 
   -webkit-appearance: none;
-  -moz-appearnce: none;
+  -moz-appearance: none;
+  border: none; 
   cursor: pointer;
 }
 
 input[type="radio"]::before {
-  display: inline-block;
-  width: 1em;
-  height: 1rem;
-  border: 1px solid grey;
-  border-radius: 50%;
+  display: flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--main-text-color);
+  font-family: 'Kanit', 'Manrope', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--dark-grey-color);
+  border-radius: 40%;
   margin-right: 0.35rem;
-  /* color: transparent; */
+  background-color: var(--light-grey-color);
+  transition: all 400ms ease 50ms;
 }
 
-input[type="radio"]:checked::before {
-  color: white;
-  background-color: var(--main-purple-color, #7733ff);
-  border: 0.14rem solid grey;
-  border-radius: 50%;
+input[class="high-priority"]::before {
+  content: '!';
+}
+
+input[class="high-priority"]:hover::before, 
+input[class="high-priority"]:checked::before {
+  border: 2px solid hsl(2, 80%, 70%);
+  background-color: hsl(2, 80%, 75%);
+}
+
+input[class="mid-priority"]::before {
+  content: '?';
+}
+
+input[class="mid-priority"]:hover::before, 
+input[class="mid-priority"]:checked::before {
+  border: 2px solid hsl(136, 80%, 60%);
+  background-color: hsl(136, 80%, 65%);
+}
+
+input[class="low-priority"]::before {
+  content: '\1f7ca';
+}
+
+input[class="low-priority"]:hover::before, 
+input[class="low-priority"]:checked::before {
+  border: 2px solid hsl(60, 80%, 60%);
+  background-color: hsl(60, 80%, 65%);
 }
 
 .deadline-row{
   align-self: flex-end;
   align-items: center;
-  /* width: 90%; */
   color: var(--main-text-color, #1e3050);
 }
 
@@ -496,6 +539,7 @@ input[type="radio"]:checked::before {
   border: none;
   outline: none;
   background-color: var(--main-purple-color, #7733ff);
+  box-shadow: rgba(0, 0, 0, 0.1) 3px 3px 2px;
   color: white;
   font-size: 1.5rem;
   font-weight: 500;
@@ -516,8 +560,8 @@ input[type="radio"]:checked::before {
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;        /* aligns items horizontally */
-  justify-content: center;    /* aligns items vertically */
+  align-items: center;                  /* aligns items horizontally */
+  justify-content: center;              /* aligns items vertically */
   transition: var(--expand-on-hover);
 }
 
@@ -533,7 +577,6 @@ input[type="radio"]:checked::before {
 
 .no-task-caption {
   display: block;
-  /* font-size: 1rem; */
   font-size: min(1rem, 1.75vw);
   font-weight: 600;
   color: #BFCDE7;
