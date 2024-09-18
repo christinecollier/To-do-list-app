@@ -38,7 +38,9 @@ let todo = JSON.parse(localStorage.getItem("todo")) || [];         //Turns strin
 
 const taskInput = document.getElementById("task-input-box");
 const detailsInput = document.getElementById("details-input-box");
-// const priorityInput = document.getElementById("priority-row")
+const highPriority = document.querySelector(".high-priority");
+const midPriority = document.querySelector(".mid-priority");
+const lowPriority = document.querySelector(".low-priority");
 const deadlineInput = document.getElementById("deadline");
 const addButton = document.querySelector(".task-btn-expanded");
 const welcomeRight = document.getElementById("right-grid-welcome");
@@ -48,13 +50,6 @@ const todoList = document.getElementById("right-list-container");
 //Remove RHS welcome when task container is not empty.
 function checkWelcomeRight() {
   todo.length === 0 ? '' : welcomeRight.style.display = 'none'; 
-}
-
-function changeTaskContainerWidth() {
-  let taskListItem = document.getElementsByClassName("task-list-item");
-  if (todo.length > 1) {
-    taskListItem.classList.add('narrow');
-  }
 }
 
 //Initialize 
@@ -74,14 +69,33 @@ document.addEventListener("DOMContentLoaded", function() {        //Listen to ev
 
 function addTask() {
   const newTask = taskInput.value.trim();                         //Extract task title input + remove trailing white-space
-  const newTaskDetails = detailsInput.value.trim();
-  // const priority = priorityInput.value;
-  const deadline = deadlineInput.value;
+  let newTaskDetails = detailsInput.value.trim();
+  newTaskDetails === "" ? newTaskDetails = "" : "";
+  let deadline = deadlineInput.value;
+  deadline === "" ? deadline = "" : "";
+  const priority = document.querySelector('input[name="priority"]:checked');
+  let prioritySymbol;
+  let priorityColor;
+  let priorityLabel = priority.value;
+  if (priority == null) {
+    prioritySymbol = "";
+  } else if (priority.value === 'Important') {
+    prioritySymbol = '!';
+    priorityColor = "var(--priority-pink)"
+  } else if (priority.value === 'Ask about') {
+    prioritySymbol = '?';
+    priorityColor = "var(--priority-green)"
+  } else if (priority.value === 'Starred') {
+    prioritySymbol = '\u2605';
+    priorityColor = "var(--priority-yellow)"
+  }
   if (newTask !== "") {                                           //If the task input is not blank
     todo.push({
       'task-title': newTask,
       'task-description': newTaskDetails,
-      // 'task-priority': priority,
+      'task-priority': prioritySymbol,
+      'task-priority-label': priorityLabel,
+      'priority-color': priorityColor,
       deadline: deadline,
       disabled: false                                             //Every new task is enabled by default
     });
@@ -90,15 +104,9 @@ function addTask() {
     detailsInput.value = "";
     displayTasks();
     checkWelcomeRight();
-    // closeEditTask()
   } else {
     alert("Enter a title for your task.");
   }
-}
-
-function deleteTask() {
-  // some logic
-  // checkWelcomeRight();
 }
 
 function displayTasks() {
@@ -106,12 +114,14 @@ function displayTasks() {
   todo.forEach((item, index) => {
     if (item['task-description'] === "") {
       let shortTaskDescription = " ";
-      todo[index]['shorter-description'] = shortTaskDescription;
-    } else if (item['task-description'] !== "" && item['task-description'].length > 72) {
+      item['shorter-description'] = shortTaskDescription;
+    } else if (item['task-description'].length > 72) {
       let shortTaskDescription = `${item['task-description'].slice(0, 68)}...`;
-      todo[index]['shorter-description'] = shortTaskDescription;
+      item['shorter-description'] = shortTaskDescription;
+    } else {
+      let shortTaskDescription = item['task-description'];
+      item['shorter-description'] = shortTaskDescription;
     }
-    
     const taskContainer = document.createElement("li"); 
     taskContainer.setAttribute('class', 'task-list-item')
     taskContainer.innerHTML = `
@@ -127,11 +137,15 @@ function displayTasks() {
             ${item['shorter-description']}
           </div>
           <div id="date-${index}" class="deadline-output ${item.disabled ? ".disabled-caption" : ""}" onclick="editTask(${index}])">
-          ${item.deadline}
+            ${item.deadline}
+          </div>
+          <div id="priority-${index}" class="priority-output ${item.disabled ? "disabled-caption" : ""}" onclick="editTask(${index})">
           </div>
         </div>
       </div>
     `;
+    let priorityColor = item['priority-color'];
+    taskContainer.querySelector('.priority-output').style.background = priorityColor;
     taskContainer.querySelector(".check-circle").addEventListener("change", () => {
       toggleTask(index);                       //Toggle the task that has been checked off
     });
@@ -145,6 +159,11 @@ function toggleTask(index) {
   displayTasks();
 }
 
+function editTask(index) {
+  // const todoItem = document.getElementById(`todo-${index}`);
+  // const existingTaskTitle = todo[index].text;
+}
+
 function saveTask(index) {
   //some logic
 }
@@ -153,6 +172,12 @@ function deleteTask(index) {
   todo.splice(index, 1);
   saveToLocalStorage();
   displayTasks();
+  let modalDocked = document.querySelector('.edit-task-container-docked');
+  let modalFloat = document.querySelector('.edit-task-container-modal');
+  let blurFilter = document.querySelector('.blur-filter');
+  modalDocked.style.display = 'none';
+  modalFloat.style.display = 'none';
+  blurFilter.style.display = 'none';
 }
 
 function saveToLocalStorage() {
@@ -165,67 +190,50 @@ function viewTask(index) {
   const blurFilter = document.createElement('div');
   blurFilter.setAttribute('class', 'blur-filter');
 
-  let editTaskContainerDocked = document.createElement('div');
-  editTaskContainerDocked.setAttribute('class', 'edit-task-container-docked');
-  let editTaskContainerModal = document.createElement('div'); 
-  editTaskContainerModal.setAttribute('class', 'edit-task-container-modal');
+  if (document.querySelector('.edit-task-container-docked') === null) {
+    let editTaskContainerDocked = document.createElement('div');
+    editTaskContainerDocked.setAttribute('class', 'edit-task-container-docked');
+    let editTaskContainerModal = document.createElement('div'); 
+    editTaskContainerModal.setAttribute('class', 'edit-task-container-modal');
 
-  wholeDocument.appendChild(blurFilter);
-  leftContainer.appendChild(editTaskContainerDocked);
-  blurFilter.appendChild(editTaskContainerModal);
+    wholeDocument.appendChild(blurFilter);
+    leftContainer.appendChild(editTaskContainerDocked);
+    blurFilter.appendChild(editTaskContainerModal);
 
-  todo.forEach((item, index) => {
-    let taskTitle = item['task-title'];
-    let taskDescription = item['task-description'];
-    // let taskPriority = item['task-priority'];
-    let deadline = item.deadline;
+    todo.forEach((item, index) => {
+      let taskTitle = item['task-title'];
+      let taskDescription = item['task-description'];
+      let taskPrioritySymbol = item['task-priority'];
+      let taskPriorityLabel = item['task-priority-label'];
+      let deadline = item.deadline;
 
-    editTaskContainerDocked.innerHTML = `
-    <div class="edit-task-title">
-      ${taskTitle}
-    </div>
-    <div class="edit-task-description">
-      ${taskDescription}
-    </div>
-    <div class="edit-deadline">
-      Deadline: ${deadline}
-    </div>
-    <button id="save-${index}" class="save-button" onclick="saveTask(${index})">
-      Save
-    </button>
-    <button id="delete-${index}" class="delete-button" onclick="deleteTask(${index})">
-      Delete
-    </button>
-    </div>
-    `;
-    editTaskContainerModal.innerHTML = editTaskContainerDocked.innerHTML;
-  });
+      editTaskContainerDocked.innerHTML = `
+      <div class="edit-task-title" onclick="editTask(${index})">
+        ${taskTitle}
+      </div>
+      <div class="edit-task-description" onclick="editTask(${index})">
+        ${taskDescription}
+      </div>
+      <div class="edit-deadline" onclick="editTask(${index})">
+        Deadline: ${deadline}
+      </div>
+      <div class="priority-save-delete-wrapper">
+        <div class="edit-priority-wrapper" onclick="editTask(${index})">
+          <span>${taskPrioritySymbol}</span>
+        </div>
+        <button id="save-${index}" class="save-button" onclick="saveTask(${index})">
+          Save
+        </button>
+        <button id="delete-${index}" class="delete-button" onclick="deleteTask(${index})">
+          Delete
+        </button>
+      </div>
+      `;
+      let editpriorityColor = item['priority-color'];
+      editTaskContainerDocked.querySelector('.edit-priority-wrapper').style.background = editpriorityColor;
+      editTaskContainerModal.innerHTML = editTaskContainerDocked.innerHTML;
+    });
+  } else {
+    console.log('Check conditional statement for displaying modal')
+  }
 }
-
-function closeEditTask() {
-  //if mouse clicks 'close' button or task is 'saved'
-  //remove the container from the DOM
-  // editTaskContainer.remove();
-}
-
-function editTask() {
-  // some logic
-}
-
-if (todoList === "") {
-  welcomeRight.style.display = 'block'; 
-} 
-
-// // Gets task input and creates a new task as a list item
-// function addTask() {
-//   if(document.getElementById("right-list-container").value == "") {
-//     document.getElementById("right-grid-welcome").hidden = false;
-//   }
-//   else{ 
-//     document.getElementById("right-grid-welcome").hidden = true;
-//   }
-// } 
-
-// function showSidepane() {
-//   document.getElementsByClassName("side-pane").hidden = false;
-// }

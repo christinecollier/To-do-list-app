@@ -25,6 +25,14 @@
   --darken-on-hover: background-color 400ms ease 50ms; 
   --small-captions: 0.8rem;
   --left-and-right-height: clamp(355px, 100%, 622px);
+  --priority-pink: hsl(2, 80%, 80%);
+  --priority-green: hsl(136, 80%, 60%);
+  --priority-yellow: hsl(60, 80%, 60%);
+  --priority-pink-light: hsl(2, 80%, 85%);
+  --priority-green-light: hsl(136, 80%, 70%);
+  --priority-yellow-light: hsl(60, 100%, 70%);
+  --button-transition: all 400ms ease 30ms;
+  --translate-up-slightly: translateY(-0.15rem);
 }
 
 html {
@@ -324,7 +332,6 @@ header {
 /* Todo app from here */
 
 .todo-app {
-  /* display: block; */
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -418,7 +425,8 @@ input:-webkit-autofill:focus {
 }
 
 .details-input-box-container:hover {
-  background-color: var(--dark-grey-color, #e6e6e6)
+  background-color: var(--dark-grey-color, #e6e6e6);
+  transition: var(--darken-on-hover);
 }
 
 #details-input-box:focus {
@@ -429,6 +437,7 @@ input:-webkit-autofill:focus {
   width: 100%;
   display: flex;
   align-items: center;
+  margin-top: 0.5rem;
 }
 
 .priority-row label {
@@ -463,7 +472,7 @@ input[type="radio"]::before {
   border-radius: 40%;
   margin-right: 0.35rem;
   background-color: var(--light-grey-color);
-  transition: all 400ms ease 50ms;
+  transition: var(--button-transition);
 }
 
 input[class="high-priority"]::before {
@@ -472,8 +481,9 @@ input[class="high-priority"]::before {
 
 input[class="high-priority"]:hover::before, 
 input[class="high-priority"]:checked::before {
-  border: 2px solid hsl(2, 80%, 70%);
-  background-color: hsl(2, 80%, 75%);
+  border: 2px solid var(--priority-pink);
+  background-color: var(--priority-pink-light);
+  transform: var(--translate-up-slightly);
 }
 
 input[class="mid-priority"]::before {
@@ -482,8 +492,9 @@ input[class="mid-priority"]::before {
 
 input[class="mid-priority"]:hover::before, 
 input[class="mid-priority"]:checked::before {
-  border: 2px solid hsl(136, 80%, 60%);
-  background-color: hsl(136, 80%, 65%);
+  border: 2px solid var(--priority-green);
+  background-color: var(--priority-green-light);
+  transform: var(--translate-up-slightly);
 }
 
 input[class="low-priority"]::before {
@@ -492,8 +503,9 @@ input[class="low-priority"]::before {
 
 input[class="low-priority"]:hover::before, 
 input[class="low-priority"]:checked::before {
-  border: 2px solid hsl(60, 80%, 60%);
-  background-color: hsl(60, 80%, 65%);
+  border: 2px solid var(--priority-yellow);
+  background-color: var(--priority-yellow-light);
+  transform: var(--translate-up-slightly);
 }
 
 .deadline-row{
@@ -591,6 +603,7 @@ input[class="low-priority"]:checked::before {
   height: 100%;
   overflow-y: auto;
   list-style: none;
+  justify-content: end;
   align-content: flex-start;
   /* Custom scrollbar for Firefox */
   /* scrollbar-color: hsl(219, 45%, 83%) white;
@@ -625,7 +638,7 @@ input[class="low-priority"]:checked::before {
 }
 
 #right-list-container li {
-  width: 100%;
+  width: 95%;
 }
 
 .task-container {
@@ -659,7 +672,8 @@ input[class="low-priority"]:checked::before {
   font-size: 0.7rem;
   display: inline-flex;
   flex-wrap: nowrap;
-  padding: 0 1.25rem;
+  padding-left: 1.25rem;
+  padding-right: 0.5rem;
 }
 
 .disabled {
@@ -723,6 +737,17 @@ input[type="checkbox"]:checked::before {
   max-height: 1.85rem;
 }
 
+.priority-output {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(var(--small-captions) * 0.75);
+  height: var(--small-captions);
+  border-radius: 25%;
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+}
+
 .deadline-output {
   font-size: inherit;
   margin-left: auto;
@@ -747,13 +772,12 @@ input[type="checkbox"]:checked::before {
   height: clamp(280px, 30vh, 480px);
   background-color: white;
   padding: 1rem 1.5rem; 
-  border: 2px solid var(--mid-purple-color);
   border-radius: 15px;
   margin-top: 2rem;
-  box-shadow: rgba(119, 51, 255, 0.1) 5px 5px 2px;
-  display: inline-flex;
+  box-shadow: rgba(0, 0, 0, 0.1) 5px 5px 2px;
+  display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  align-content: flex-start;
 }
 
 .edit-task-container-docked {
@@ -770,14 +794,16 @@ input[type="checkbox"]:checked::before {
   width: 100%;
 }
 
-.edit-task-description, .edit-priority, .edit-deadline {
+.edit-task-description, .edit-priority, .edit-deadline, .edit-priority-wrapper span {
   font-size: var(--small-captions, 0.8rem);
+  user-select: none;
 }
 
 .edit-task-title {
   display: flex;
   align-items: center;
   width: 100%;
+  height: 1rem;
   font-size: 1rem;
   margin: 0.5rem 0;
 }
@@ -788,8 +814,21 @@ input[type="checkbox"]:checked::before {
   margin: 0.5rem 0 1rem 0;
 }
 
-.edit-priority {
-  width: 2rem;
+.edit-priority-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: calc(var(--small-captions) + 0.5rem);
+  padding-right: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.edit-priority-wrapper span {
+  padding-left: 0.25rem;
+  font-family: 'Kanit', 'Manrope', sans-serif;
+  font-weight: 400;
+  justify-self: flex-end;
+  cursor: pointer;
 }
 
 .edit-deadline {
@@ -797,7 +836,15 @@ input[type="checkbox"]:checked::before {
   width: 100%;
   justify-content: flex-start;
   align-items: center;
-  margin-right: 0.5rem 0;
+  margin-bottom: 0.5rem;
+}
+
+.priority-save-delete-wrapper {
+  width: 100%;
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: end;
+  margin-top: auto;
 }
 
 .save-button, .delete-button {
@@ -806,24 +853,35 @@ input[type="checkbox"]:checked::before {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 2px solid var(--dark-grey-color);
   border-radius: 25px;
   font-size: var(--small-captions);
-  font-weight: 600;
+  font-weight: 500;
+  color: hsl(0, 0%, 40%);
   cursor: pointer;
 }
 
 .save-button {
-  border: none;
-  background: var(--light-grey-color);
-  color: var(--main-purple-color, #7733ff);
+  background: transparent;
   margin: auto 0.5rem 0 auto;
 }
 
+.save-button:hover {
+  border: 2px solid var(--main-purple-color);
+  background: var(--main-purple-color);
+  color: white;
+  transition: var(--button-transition);
+}
+
 .delete-button {
-  border: 2px solid var(--main-purple-color, #7733ff);
-  margin-top: auto;
-  background: transparent;
-  color: var(--main-purple-color, #7733ff);
+  background: var(--dark-grey-color);
+}
+
+.delete-button:hover {
+  border: 2px solid grey;
+  background: grey;
+  color: white;
+  transition: var(--button-transition);
 }
 
 .bin-icon {
@@ -869,6 +927,13 @@ input[type="checkbox"]:checked::before {
   }
   .task-btn-minimised {
     visibility: visible;
+  }
+  #right-list-container li {
+    width: 100%;
+  }
+  .task-container:hover {
+    background-color: var(--light-grey-color);
+    transform: none;
   }
   .edit-task-container-docked {
     display: none;
