@@ -104,6 +104,8 @@ function addTask() {
     detailsInput.value = "";
     displayTasks();
     checkWelcomeRight();
+    let priority = document.querySelector('input[name="priority"]');
+    priority.checked = 'false';
   } else {
     alert("Enter a title for your task.");
   }
@@ -128,18 +130,18 @@ function displayTasks() {
       <div class="task-container" onclick="viewTask(${index})">
         <div class="task-row-1">
           <input type="checkbox" class="check-circle" id="input-${index}" ${item.disabled ? "checked" : ""}>
-          <div id="todo-${index}" class="task-title ${item.disabled ? "disabled" : ""}" onclick="editTask(${index})">
+          <div id="todo-${index}" class="task-title ${item.disabled ? "disabled" : ""}">
             ${item['task-title']}
           </div>
         </div>
         <div class="task-row-2">
-          <div id="description-${index}" class="task-details ${item.disabled ? ".disabled-caption" : ""}" onclick="editTask(${index})">
+          <div id="description-${index}" class="task-details ${item.disabled ? ".disabled-caption" : ""}">
             ${item['shorter-description']}
           </div>
-          <div id="date-${index}" class="deadline-output ${item.disabled ? ".disabled-caption" : ""}" onclick="editTask(${index}])">
+          <div id="date-${index}" class="deadline-output ${item.disabled ? ".disabled-caption" : ""}">
             ${item.deadline}
           </div>
-          <div id="priority-${index}" class="priority-output ${item.disabled ? "disabled-caption" : ""}" onclick="editTask(${index})">
+          <div id="priority-${index}" class="priority-output ${item.disabled ? "disabled-caption" : ""}">
           </div>
         </div>
       </div>
@@ -159,29 +161,50 @@ function toggleTask(index) {
   displayTasks();
 }
 
-function editTask(index) {
-  // const todoItem = document.getElementById(`todo-${index}`);
-  // const existingTaskTitle = todo[index].text;
+function editTitle(index) {
+//Edit task title
+  const existingTitle = document.querySelector('.edit-task-title');
+  const newTitle = document.createElement('input');
+  newTitle.value = todo[index]['task-title'];
+  console.log(`${existingTitle} is the existing title`)
+  existingTitle.replaceWith(newTitle);
+
+  newTitle.focus();
+  newTitle.addEventListener('blur', function () {
+    const updatedTitle = newTitle.textContent.trim();
+    if (updatedTitle) {
+      todo[index]['task-title'] === updatedTitle;
+      saveToLocalStorage();
+    }
+    displayTasks();
+    viewTask();
+  });
+}
+
+function saveToLocalStorage() {
+  localStorage.setItem("todo", JSON.stringify(todo));
+}
+
+function exitModal() {
+  let gridContainer = document.querySelector('.grid-container');
+  let leftContainer = document.querySelector('.left-container');
+  let modalDocked = document.querySelector('.edit-task-modal-docked');
+  let blurFilter = document.querySelector('.blur-filter');
+
+  leftContainer.removeChild(modalDocked);
+  gridContainer.removeChild(blurFilter);
 }
 
 function saveTask(index) {
   //some logic
+  exitModal();
 }
 
 function deleteTask(index) {
   todo.splice(index, 1);
   saveToLocalStorage();
   displayTasks();
-  let modalDocked = document.querySelector('.edit-task-container-docked');
-  let modalFloat = document.querySelector('.edit-task-container-modal');
-  let blurFilter = document.querySelector('.blur-filter');
-  modalDocked.style.display = 'none';
-  modalFloat.style.display = 'none';
-  blurFilter.style.display = 'none';
-}
-
-function saveToLocalStorage() {
-  localStorage.setItem("todo", JSON.stringify(todo));
+  exitModal();
 }
 
 function viewTask(index) {
@@ -190,36 +213,38 @@ function viewTask(index) {
   const blurFilter = document.createElement('div');
   blurFilter.setAttribute('class', 'blur-filter');
 
-  if (document.querySelector('.edit-task-container-docked') === null) {
-    let editTaskContainerDocked = document.createElement('div');
-    editTaskContainerDocked.setAttribute('class', 'edit-task-container-docked');
-    let editTaskContainerModal = document.createElement('div'); 
-    editTaskContainerModal.setAttribute('class', 'edit-task-container-modal');
+  if (document.querySelector('.edit-task-modal-docked') === null) {
+    function createNewModal(index) {
+      let editTaskModalDocked = document.createElement('div');
+      editTaskModalDocked.setAttribute('class', 'edit-task-modal-docked');
+      editTaskModalDocked.setAttribute('id', `docked-task-container-${index}`)
 
-    wholeDocument.appendChild(blurFilter);
-    leftContainer.appendChild(editTaskContainerDocked);
-    blurFilter.appendChild(editTaskContainerModal);
+      let editTaskModalFloat = document.createElement('div'); 
+      editTaskModalFloat.setAttribute('class', 'floating-task-modal-float');
+      editTaskModalFloat.setAttribute('id', `floating-task-container-${index}`)
 
-    todo.forEach((item, index) => {
-      let taskTitle = item['task-title'];
-      let taskDescription = item['task-description'];
-      let taskPrioritySymbol = item['task-priority'];
-      let taskPriorityLabel = item['task-priority-label'];
-      let deadline = item.deadline;
+      wholeDocument.appendChild(blurFilter);
+      leftContainer.appendChild(editTaskModalDocked);
+      blurFilter.appendChild(editTaskModalFloat);
+      let todoItem = todo[index];
+      let taskTitle = todoItem['task-title'];
+      let taskDescription = todoItem['task-description'];
+      let taskPriorityLabel = todoItem['task-priority-label'];
+      let deadline = todoItem.deadline;
 
-      editTaskContainerDocked.innerHTML = `
-      <div class="edit-task-title" onclick="editTask(${index})">
+      editTaskModalDocked.innerHTML = `
+      <div id="modal-task-title-${index}" class="edit-task-title" onclick="editTitle(${index})">
         ${taskTitle}
       </div>
-      <div class="edit-task-description" onclick="editTask(${index})">
+      <div id="modal-task-description-${index}" class="edit-task-description">
         ${taskDescription}
       </div>
-      <div class="edit-deadline" onclick="editTask(${index})">
-        Deadline: ${deadline}
+      <div id="modal-deadline-${index}" class="edit-deadline">
+        ${deadline !== "" ? `Deadline: ${deadline}` : ""}
       </div>
       <div class="priority-save-delete-wrapper">
-        <div class="edit-priority-wrapper" onclick="editTask(${index})">
-          <span>${taskPrioritySymbol}</span>
+        <div id="modal-priority-${index}" class="edit-priority-wrapper">
+          <span>${taskPriorityLabel}</span>
         </div>
         <button id="save-${index}" class="save-button" onclick="saveTask(${index})">
           Save
@@ -228,12 +253,24 @@ function viewTask(index) {
           Delete
         </button>
       </div>
-      `;
-      let editpriorityColor = item['priority-color'];
-      editTaskContainerDocked.querySelector('.edit-priority-wrapper').style.background = editpriorityColor;
-      editTaskContainerModal.innerHTML = editTaskContainerDocked.innerHTML;
-    });
+    `;
+    let editPriorityColor = todoItem['priority-color'];
+    editTaskModalDocked.querySelector('.edit-priority-wrapper').style.background = editPriorityColor;
+    editTaskModalFloat.innerHTML = editTaskModalDocked.innerHTML;
+    let editTaskDescription = document.querySelector('.edit-task-description');
+      if (taskDescription !== "") {
+        editTaskDescription.style.margin = "1rem 0"
+      } 
+    }
+    createNewModal(index);
   } else {
-    console.log('Check conditional statement for displaying modal')
+    let existingModalDocked = document.querySelector('.edit-task-modal-docked');
+    let existingBlurFilter = document.querySelector('.blur-filter');
+    let leftContainer = document.querySelector('.left-container');
+    let gridContainer = document.querySelector('.grid-container');
+
+    leftContainer.removeChild(existingModalDocked)
+    gridContainer.removeChild(existingBlurFilter);
+    viewTask(index)
   }
 }
