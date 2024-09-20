@@ -45,7 +45,6 @@ const deadlineInput = document.getElementById("deadline");
 const addButton = document.querySelector(".task-btn-expanded");
 const welcomeRight = document.getElementById("right-grid-welcome");
 const todoList = document.getElementById("right-list-container");
-// const deleteButton = document.querySelector(".delete-button");
 
 //Remove RHS welcome when task container is not empty.
 function checkWelcomeRight() {
@@ -62,7 +61,6 @@ document.addEventListener("DOMContentLoaded", function() {        //Listen to ev
       checkWelcomeRight();
     }
   });
-  // deleteButton.addEventListener("click", deleteTask);
   displayTasks();
   checkWelcomeRight();
 }); 
@@ -75,18 +73,24 @@ function addTask() {
   deadline === "" ? deadline = "" : "";
   const priority = document.querySelector('input[name="priority"]:checked');
   let prioritySymbol;
+  let priorityLabel;
   let priorityColor;
-  let priorityLabel = priority.value;
-  if (priority == null) {
-    prioritySymbol = "";
+
+  if (priority == null || priority.value === 'no-priority') {
+    prioritySymbol = '';
+    priorityLabel = '';
+    priorityColor = '';
   } else if (priority.value === 'Important') {
     prioritySymbol = '!';
+    priorityLabel = priority.value;
     priorityColor = "var(--priority-pink)"
   } else if (priority.value === 'Ask about') {
     prioritySymbol = '?';
+    priorityLabel = priority.value;
     priorityColor = "var(--priority-green)"
   } else if (priority.value === 'Starred') {
     prioritySymbol = '\u2605';
+    priorityLabel = priority.value;
     priorityColor = "var(--priority-yellow)"
   }
   if (newTask !== "") {                                           //If the task input is not blank
@@ -127,14 +131,14 @@ function displayTasks() {
     const taskContainer = document.createElement("li"); 
     taskContainer.setAttribute('class', 'task-list-item')
     taskContainer.innerHTML = `
-      <div class="task-container" onclick="viewTask(${index})">
+      <div class="task-container">
         <div class="task-row-1">
           <input type="checkbox" class="check-circle" id="input-${index}" ${item.disabled ? "checked" : ""}>
-          <div id="todo-${index}" class="task-title ${item.disabled ? "disabled" : ""}">
+          <div id="todo-${index}" class="task-title ${item.disabled ? "disabled" : ""}" onclick="viewTask(${index})">
             ${item['task-title']}
           </div>
         </div>
-        <div class="task-row-2">
+        <div class="task-row-2" onclick="viewTask(${index})">
           <div id="description-${index}" class="task-details ${item.disabled ? ".disabled-caption" : ""}">
             ${item['shorter-description']}
           </div>
@@ -162,24 +166,93 @@ function toggleTask(index) {
 }
 
 function editTitle(index) {
-//Edit task title
-  const existingTitle = document.querySelector('.edit-task-title');
-  const newTitle = document.createElement('input');
-  newTitle.value = todo[index]['task-title'];
-  console.log(`${existingTitle} is the existing title`)
-  existingTitle.replaceWith(newTitle);
+  const modalContainer = document.getElementById(`docked-task-container-${index}`);
+  const existingTitleContainer = document.getElementById(`modal-task-title-${index}`);
+  const existingTitleText = todo[index]['task-title'];
+  const newTitleContainer = document.createElement('input');
+  newTitleContainer.setAttribute('class', 'new-task-title');
+  newTitleContainer.maxLength = 40;
+  newTitleContainer.value =  existingTitleText;
 
-  newTitle.focus();
-  newTitle.addEventListener('blur', function () {
-    const updatedTitle = newTitle.textContent.trim();
-    if (updatedTitle) {
-      todo[index]['task-title'] === updatedTitle;
-      saveToLocalStorage();
+  modalContainer.replaceChild(newTitleContainer, existingTitleContainer);
+  todo[index]['task-title'] = newTitleContainer.value;
+
+  newTitleContainer.focus();
+  const saveBtn = document.querySelector('.save-button');
+  saveBtn.style.display = 'flex';
+  const deleteBtn = document.querySelector('.delete-button');
+  deleteBtn.style.marginLeft = '0';
+
+  newTitleContainer.addEventListener('blur', function () {
+    function saveAndClose() {
+      const saveButton = document.getElementById(`save-${index}`);
+      saveButton.addEventListener('click', function () {
+        const updatedTitle = newTitleContainer.value.trim();
+        if (updatedTitle) {
+          todo[index]['task-title'] === updatedTitle;
+          saveToLocalStorage();
+        } else {
+          newTitleContainer.value =  existingTitleText;
+        }
+        saveToLocalStorage();
+        displayTasks();
+        viewTask();
+      });
     }
-    displayTasks();
-    viewTask();
+    if (newTitleContainer.value === "") {
+      newTitleContainer.value = existingTitleText;
+      saveAndClose();
+    } else {
+      saveAndClose();
+    }
   });
 }
+
+function editDescription(index) {
+  const modalContainer = document.getElementById(`docked-task-container-${index}`);
+  const existingDescriptionContainer = document.getElementById(`modal-task-description-${index}`);
+  const existingDescriptionText = todo[index]['task-description'];
+  const newDescriptionContainer = document.createElement('div');
+  newDescriptionContainer.setAttribute('class', 'new-task-description-container');
+  const newDescriptionTextarea = document.createElement('textarea');
+  newDescriptionTextarea.setAttribute('class', 'new-task-description');
+  newDescriptionTextarea.maxLength = 130;
+
+  newDescriptionTextarea.value =  existingDescriptionText;
+  modalContainer.replaceChild(newDescriptionTextarea, existingDescriptionContainer);
+  todo[index]['task-description'] = newDescriptionTextarea.value;
+  newDescriptionTextarea.focus();
+
+  const saveBtn = document.querySelector('.save-button');
+  saveBtn.style.display = 'flex';
+  const deleteBtn = document.querySelector('.delete-button');
+  deleteBtn.style.marginLeft = '0';
+
+  newDescriptionTextarea.addEventListener('blur', function() {
+    function saveAndClose() {
+      const saveButton = document.getElementById(`save-${index}`);
+      saveButton.addEventListener('click', function () {
+        const updatedDescription = newDescriptionTextarea.value.trim();
+        if (updatedDescription) {
+          todo[index]['task-description'] = updatedDescription;
+          saveToLocalStorage();
+        } else {
+          newDescriptionTextarea.value =  existingDescriptionText;
+        }
+        saveToLocalStorage();
+        displayTasks();
+        exitModal();
+      });
+    }
+    if (newDescriptionTextarea.value === "") {
+      newDescriptionTextarea.value = existingDescriptionText;
+      saveAndClose();
+    } else {
+      saveAndClose();
+    }
+  });
+}
+
 
 function saveToLocalStorage() {
   localStorage.setItem("todo", JSON.stringify(todo));
@@ -193,11 +266,6 @@ function exitModal() {
 
   leftContainer.removeChild(modalDocked);
   gridContainer.removeChild(blurFilter);
-}
-
-function saveTask(index) {
-  //some logic
-  exitModal();
 }
 
 function deleteTask(index) {
@@ -233,27 +301,30 @@ function viewTask(index) {
       let deadline = todoItem.deadline;
 
       editTaskModalDocked.innerHTML = `
-      <div id="modal-task-title-${index}" class="edit-task-title" onclick="editTitle(${index})">
-        ${taskTitle}
-      </div>
-      <div id="modal-task-description-${index}" class="edit-task-description">
-        ${taskDescription}
-      </div>
-      <div id="modal-deadline-${index}" class="edit-deadline">
-        ${deadline !== "" ? `Deadline: ${deadline}` : ""}
-      </div>
-      <div class="priority-save-delete-wrapper">
-        <div id="modal-priority-${index}" class="edit-priority-wrapper">
-          <span>${taskPriorityLabel}</span>
+        <div class="edit-title-check-container" id="title-check-${index}">
+          <div id="modal-task-title-${index}" class="edit-task-title" onclick="editTitle(${index})">
+            ${taskTitle}
+          </div>
+          ${todoItem.disabled ? `<div id="check-${index}" class="edit-check">\u2713</div>` : ''}
         </div>
-        <button id="save-${index}" class="save-button" onclick="saveTask(${index})">
-          Save
-        </button>
-        <button id="delete-${index}" class="delete-button" onclick="deleteTask(${index})">
-          Delete
-        </button>
-      </div>
-    `;
+        <div id="modal-task-description-${index}" class="edit-task-description" onclick="editDescription(${index})">
+          ${taskDescription}
+        </div>
+        <div id="modal-deadline-${index}" class="edit-deadline">
+          ${deadline !== "" ? `Deadline: ${deadline}` : ""}
+        </div>
+        <div class="priority-save-delete-wrapper">
+          <div id="modal-priority-${index}" class="edit-priority-wrapper">
+            <span>${taskPriorityLabel}</span>
+          </div>
+          <button id="save-${index}" class="save-button">
+            Save
+          </button>
+          <button id="delete-${index}" class="delete-button" onclick="deleteTask(${index})">
+            Delete
+          </button>
+        </div>
+      `;
     let editPriorityColor = todoItem['priority-color'];
     editTaskModalDocked.querySelector('.edit-priority-wrapper').style.background = editPriorityColor;
     editTaskModalFloat.innerHTML = editTaskModalDocked.innerHTML;
