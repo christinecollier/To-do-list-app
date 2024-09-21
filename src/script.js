@@ -166,7 +166,7 @@ function toggleTask(index) {
 }
 
 function editTitle(index) {
-  const modalContainer = document.getElementById(`docked-task-container-${index}`);
+  const existingTitleCheckContainer = document.getElementById(`title-check-${index}`);
   const existingTitleContainer = document.getElementById(`modal-task-title-${index}`);
   const existingTitleText = todo[index]['task-title'];
   const newTitleContainer = document.createElement('input');
@@ -174,7 +174,7 @@ function editTitle(index) {
   newTitleContainer.maxLength = 40;
   newTitleContainer.value =  existingTitleText;
 
-  modalContainer.replaceChild(newTitleContainer, existingTitleContainer);
+  existingTitleCheckContainer.replaceChild(newTitleContainer, existingTitleContainer);
   todo[index]['task-title'] = newTitleContainer.value;
 
   newTitleContainer.focus();
@@ -184,6 +184,7 @@ function editTitle(index) {
   deleteBtn.style.marginLeft = '0';
 
   newTitleContainer.addEventListener('blur', function () {
+    newTitleContainer.style.border = 'none';
     function saveAndClose() {
       const saveButton = document.getElementById(`save-${index}`);
       saveButton.addEventListener('click', function () {
@@ -219,7 +220,8 @@ function editDescription(index) {
   newDescriptionTextarea.maxLength = 130;
 
   newDescriptionTextarea.value =  existingDescriptionText;
-  modalContainer.replaceChild(newDescriptionTextarea, existingDescriptionContainer);
+  modalContainer.replaceChild(newDescriptionContainer, existingDescriptionContainer);
+  newDescriptionContainer.appendChild(newDescriptionTextarea);
   todo[index]['task-description'] = newDescriptionTextarea.value;
   newDescriptionTextarea.focus();
 

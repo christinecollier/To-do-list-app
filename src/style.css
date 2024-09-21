@@ -12,6 +12,7 @@
 
 :root{
   --main-background-color: #f3f3f3;
+  --main-tabs-color: #ffffff;
   --main-purple-color: hsl(240, 100%, 69%);
   --mid-purple-color: hsl(252, 100%, 92%);
   --light-purple-color: hsl(252, 100%, 97%);
@@ -31,6 +32,7 @@
   --priority-pink-light: hsl(2, 80%, 85%);
   --priority-green-light: hsl(136, 80%, 70%);
   --priority-yellow-light: hsl(60, 100%, 70%);
+  --blue-color: hsl(220, 80%, 60%);
   --button-transition: all 400ms ease 30ms;
   --translate-up-slightly: translateY(-0.15rem);
 }
@@ -55,7 +57,7 @@ body{
   margin: 0 auto;
   grid-template: repeat(10, 1fr) / repeat(7, 1fr);
   gap: 0;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 /* Experimental app start welcome page from here */
@@ -212,7 +214,7 @@ header {
 .left {
   width: clamp(380px, 40vw, 900px);
   height: clamp(280px, 30vh, 480px);
-  background-color: white;
+  background-color: var( --main-tabs-color);
   padding: 1.25rem 1.75rem; 
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 2px;
@@ -237,30 +239,34 @@ header {
 }
 
 /* Diffuse coloured circles */
-.green-container {
-  grid-area: 1 / 3 / span 5 / span 2;
+.diffuse-circle {
+  opacity: 20%;
+  width: 25vw;
+  height: 25vw;
+  border-radius: 50%;
+  filter: blur(3vw);
   z-index: -1;
 }
 
-.pink-container {
+#green-container {
+  grid-area: 1 / 4 / span 5 / span 2;
+  background-color: var(--priority-green-light);
+}
+
+#pink-container {
   grid-area: 5 / 2 / span 5 / span 2;
-  z-index: -1;
+  background-color: var(--priority-pink-light);
 }
 
-.blue-container {
-  grid-area: 2 / 6 / span 5 / span 2;
-  z-index: -1;
+#blue-container {
+  grid-area: 4 / 6 / span 5 / span 2;
+  background-color: var(--blue-color);
 }
 
-.yellow-container {
-  grid-area: 6 / 4 / span 5 / span 2;
-  z-index: -1;
+#yellow-container {
+  grid-area: 7 / 4 / span 5 / span 2;
+  background-color: var(--priority-yellow-light);
 }
-
-#green-circle, #pink-circle, #blue-circle, #yellow-circle {
-  max-width: 100%;
-  max-height: 100%;
-} 
 
 /* Side pane */
 .home, .account, .hamburger-menu {
@@ -562,7 +568,7 @@ input[class="low-priority"]:checked::before {
 #right-grid-welcome {                   /*not made a flex container as display property*/
   width: 100%;                          /*is changed to hidden by JS ('display:flex' overrides*/
   height: clamp(280px, 35vh, 400px);    /*the 'display:hidden' style)*/
-  background-color: white;
+  background-color: var( --main-tabs-color);
   border-radius: 15px;
   position: relative
 }
@@ -629,8 +635,11 @@ input[class="low-priority"]:checked::before {
 
 @media (min-width: 1600px) {
   #right-list-container {
-    justify-content: space-between;
+    justify-content: space-around;
     transition: width 600ms ease 50ms;
+  }
+  #right {
+    width: clamp(30vw, 37vw, 900px);
   }
   #right #right-list-container li {
     width: min(48%, 324px);
@@ -651,7 +660,7 @@ input[class="low-priority"]:checked::before {
   user-select: none;
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 2px;
-  background-color: white;
+  background-color: var( --main-tabs-color);
 }
 
 .task-container:hover {
@@ -783,7 +792,7 @@ input[type="checkbox"]:checked::before {
   width: clamp(380px, 40vw, 900px);
   min-height: 180px;
   max-height: 480px;
-  background-color: white;
+  background-color: var( --main-tabs-color);
   padding: 1rem 1.5rem; 
   border-radius: 15px;
   margin-top: 2rem;
@@ -815,7 +824,6 @@ input[type="checkbox"]:checked::before {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 1rem;
   font-size: 1rem;
   font-weight: 500;
 }
@@ -837,7 +845,7 @@ input[type="checkbox"]:checked::before {
   align-items: center;
   border: none;
   border-radius: 50%;
-  margin-left: auto;
+  margin-left: 0.5rem;
   color: white;
   font-size: 0.8rem;
   font-weight: 500;
@@ -854,10 +862,9 @@ input[type="checkbox"]:checked::before {
 .new-task-description-container {
   max-height: 4.5rem;
   width: 100%;
-  /* padding: 0.5rem 0; */
+  margin: 1rem 0;
   border: none;
   border-radius: 0.8rem;
-  background-color: var(--light-grey-color, #f3f3f3);
 }
 
 .new-task-description {
@@ -865,13 +872,21 @@ input[type="checkbox"]:checked::before {
   word-wrap: break-word; 
   padding: 0.2rem 0;
   border: none;
-  font-size: 0.7rem;
+  font-size: var(--small-captions);
   background: transparent;
   max-width: 100%;
   min-width: 100%; 
   max-height: 120%;
   min-height: 120%;
   resize: none;
+}
+
+.new-task-title:focus, .new-task-description:focus {
+  border-style: none;
+  outline: none;
+  padding: 0.25rem;
+  color: var(--main-purple-color);
+  background-color: var(--light-grey-color);
 }
 
 .edit-priority-wrapper {
@@ -945,7 +960,7 @@ input[type="checkbox"]:checked::before {
 
 .delete-button:hover {
   border: 2px solid var(--main-purple-color);
-  background: white;
+  background: var( --main-tabs-color);
   color: var(--main-purple-color);
   font-weight: 500;
   transition: var(--button-transition);
@@ -1040,12 +1055,6 @@ input[type="checkbox"]:checked::before {
     align-items: center;
     padding-left: min(calc(100vw / 7), 110px);
   }
-  .green-container {
-    grid-area: 1 / 2 / span 5 / span 2;
-  }
-  .yellow-container {
-    grid-area: 6 / 6 / span 4 / span 2;
-  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -1077,6 +1086,19 @@ input[type="checkbox"]:checked::before {
   .blur-filter {
     padding-left: max(60px, calc(100vw / 14));
   }
+  .diffuse-circle {
+    width: 30vw;
+    height: 30vw;
+  }
+  #green-container {
+    grid-area: 2 / 2 / span 5 / span 2;
+  }
+  #pink-container {
+    grid-area: 7 / 1 / span 5 / span 2; 
+  }
+  #yellow-container {
+    grid-area: 8 / 6 / span 4 / span 2;
+  }
 }
 
 @media only screen and (max-width: 480px) {
@@ -1103,5 +1125,12 @@ input[type="checkbox"]:checked::before {
   }
   #right {
     margin-top: 1.5rem;
+  }
+}
+
+@media (min-height: 1024px) {
+  #right-list-container {
+    margin-top: 1.25rem;
+    height: 35vh;
   }
 }
