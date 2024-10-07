@@ -11,28 +11,6 @@ setInterval(function(){
   time();
 },1000);
 
-
-//Side-pane toggle functionality
-// const toggleMenu = document.querySelector('.alternative-menu');
-// const sidepane = document.querySelector('.side-pane');
-
-// toggleMenu.addEventListener("click", function () {
-//   sidepane.classList.toggle("show-sidepane");
-// });
-
-
-// var btn = document.querySelector('.alternative-menu');
-// var btnst = true;
-// btn.onclick = function() {
-//   if(btnst == true) {
-//     document.getElementById('side-pane').classList.add('show-sidepane');
-//     btnst = false;
-//   }else if(btnst == false) {
-//     document.getElementById('side-pane').classList.remove('show-sidepane');
-//     btnst = true;
-//   }
-// }
-
 //Retrieve todo from local storage
 let todo = JSON.parse(localStorage.getItem("todo")) || [];         //Turns string into object in a list/create a new list
 
@@ -266,9 +244,26 @@ function exitModal() {
   let modalDocked = document.querySelector('.edit-task-modal-docked');
   let blurFilter = document.querySelector('.blur-filter');
 
-  leftContainer.removeChild(modalDocked);
-  gridContainer.removeChild(blurFilter);
+  leftContainer.contains(modalDocked) ? leftContainer.removeChild(modalDocked) : '';
+  gridContainer.contains(blurFilter) ? gridContainer.removeChild(blurFilter) : '';
 }
+
+function closeModalFloat() {
+  const blurFilter = document.querySelector('.blur-filter');
+  if (blurFilter) {
+    const wholeDocument = document.querySelector('.grid-container');
+    blurFilter.addEventListener ('click', function() {
+      wholeDocument.removeChild(blurFilter);
+    });
+  } 
+}
+
+document.addEventListener('click', function (event) {
+  if (!event.target.closest('.edit-task-modal')) {
+    closeModalFloat(event);
+  } 
+});
+
 
 function deleteTask(index) {
   todo.splice(index, 1);
@@ -278,72 +273,111 @@ function deleteTask(index) {
 }
 
 function viewTask(index) {
-  const wholeDocument = document.querySelector('.grid-container');
-  const leftContainer = document.querySelector('.left-container')
-  const blurFilter = document.createElement('div');
-  blurFilter.setAttribute('class', 'blur-filter');
+  if (document.getElementById(`docked-task-container-${index}`) === null) {
+    if (document.querySelector('.edit-task-modal') === null) {
+      let modalContainer = document.createElement('div'); 
+      modalContainer.setAttribute('class', 'edit-task-modal');
+      modalContainer.setAttribute('id', `docked-task-container-${index}`)
 
-  if (document.querySelector('.edit-task-modal-docked') === null) {
-    function createNewModal(index) {
-      let editTaskModalDocked = document.createElement('div');
-      editTaskModalDocked.setAttribute('class', 'edit-task-modal-docked');
-      editTaskModalDocked.setAttribute('id', `docked-task-container-${index}`)
-
-      let editTaskModalFloat = document.createElement('div'); 
-      editTaskModalFloat.setAttribute('class', 'floating-task-modal-float');
-      editTaskModalFloat.setAttribute('id', `floating-task-container-${index}`)
-
-      wholeDocument.appendChild(blurFilter);
-      leftContainer.appendChild(editTaskModalDocked);
-      blurFilter.appendChild(editTaskModalFloat);
       let todoItem = todo[index];
       let taskTitle = todoItem['task-title'];
       let taskDescription = todoItem['task-description'];
       let taskPriorityLabel = todoItem['task-priority-label'];
       let deadline = todoItem.deadline;
 
-      editTaskModalDocked.innerHTML = `
+      modalContainer.innerHTML = `
         <div class="edit-title-check-container" id="title-check-${index}">
           <div id="modal-task-title-${index}" class="edit-task-title" onclick="editTitle(${index})">
             ${taskTitle}
           </div>
           ${todoItem.disabled ? `<div id="check-${index}" class="edit-check">\u2713</div>` : ''}
-        </div>
-        <div id="modal-task-description-${index}" class="edit-task-description" onclick="editDescription(${index})">
-          ${taskDescription}
-        </div>
-        <div id="modal-deadline-${index}" class="edit-deadline">
-          ${deadline !== "" ? `Deadline: ${deadline}` : ""}
-        </div>
-        <div class="priority-save-delete-wrapper">
-          <div id="modal-priority-${index}" class="edit-priority-wrapper">
-            <span>${taskPriorityLabel}</span>
           </div>
-          <button id="save-${index}" class="save-button">
-            Save
-          </button>
-          <button id="delete-${index}" class="delete-button" onclick="deleteTask(${index})">
-            Delete
-          </button>
+          <div id="modal-task-description-${index}" class="edit-task-description" onclick="editDescription(${index})">
+            ${taskDescription}
+          </div>
+          <div id="modal-deadline-${index}" class="edit-deadline">
+            ${deadline !== "" ? `Deadline: ${deadline}` : ""}
+          </div>
+          <div class="priority-save-delete-wrapper">
+            <div id="modal-priority-${index}" class="edit-priority-wrapper">
+              <span>${taskPriorityLabel}</span>
+            </div>
+            <button id="save-${index}" class="save-button">
+              Save
+            </button>
+            <button id="delete-${index}" class="delete-button" onclick="deleteTask(${index})">
+              Delete
+            </button>
+          </div>
         </div>
       `;
-    let editPriorityColor = todoItem['priority-color'];
-    editTaskModalDocked.querySelector('.edit-priority-wrapper').style.background = editPriorityColor;
-    editTaskModalFloat.innerHTML = editTaskModalDocked.innerHTML;
-    let editTaskDescription = document.querySelector('.edit-task-description');
-      if (taskDescription !== "") {
-        editTaskDescription.style.margin = "1rem 0"
+      let editPriorityColor = todoItem['priority-color'];
+      modalContainer.querySelector('.edit-priority-wrapper').style.background = editPriorityColor;
+    
+      if (window.innerWidth > 922) {
+        const leftContainer = document.querySelector('.left-container');
+        leftContainer.appendChild(modalContainer);
+      } else {
+        const wholeDocument = document.querySelector('.grid-container');
+        const blurFilter = document.createElement('div');
+        blurFilter.setAttribute('class', 'blur-filter');
+        wholeDocument.appendChild(blurFilter);
+        blurFilter.appendChild(modalContainer);
+      }
+      let editTaskDescription = document.getElementById(`modal-task-description-${index}`);
+      if (taskDescription !== '') {
+        editTaskDescription ? editTaskDescription.style.margin = "1rem 0" : '';
       } 
     }
-    createNewModal(index);
+    //If a modal already exists
+    else {
+      let existingModalDocked = document.querySelector('.edit-task-modal');
+      let existingBlurFilter = document.querySelector('.blur-filter');
+      let leftContainer = document.querySelector('.left-container');
+      let gridContainer = document.querySelector('.grid-container');
+      leftContainer ? leftContainer.removeChild(existingModalDocked) : '';
+      existingBlurFilter ? gridContainer.removeChild(existingBlurFilter) : '';
+      viewTask(index)
+    }
   } else {
-    let existingModalDocked = document.querySelector('.edit-task-modal-docked');
-    let existingBlurFilter = document.querySelector('.blur-filter');
-    let leftContainer = document.querySelector('.left-container');
-    let gridContainer = document.querySelector('.grid-container');
-
-    leftContainer.removeChild(existingModalDocked)
-    gridContainer.removeChild(existingBlurFilter);
-    viewTask(index)
+    const leftContainer = document.querySelector('.left-container');
+    const existingModalContainer = document.getElementById(`docked-task-container-${index}`)
+    leftContainer.removeChild(existingModalContainer);
   }
 }
+
+window.addEventListener('resize', function() {
+  const wholeDocument = document.querySelector('.grid-container');
+  const modalContainer = document.querySelector('.edit-task-modal');
+  const leftContainer = document.querySelector('.left-container');
+  let blurFilter = document.querySelector('.blur-filter');
+
+  if (modalContainer !== null) {
+    if (window.innerWidth < 922) {
+      if (blurFilter === null) {
+        blurFilter = document.createElement('div');
+        blurFilter.setAttribute('class', 'blur-filter');
+        wholeDocument.appendChild(blurFilter);
+        blurFilter.appendChild(modalContainer);
+        leftContainer.removeChild(modalContainer)
+      }
+    } else {
+      if (leftContainer.contains(modalContainer) === false) {
+        leftContainer.appendChild(modalContainer);
+        if (blurFilter) {
+          wholeDocument.removeChild(blurFilter);
+        }
+      }
+    }
+  }
+})
+
+//Side-pane toggle functionality
+const toggleMenu = document.querySelector('.alternative-menu');
+toggleMenu.addEventListener('click', function() {
+  const sidepane = document.querySelector('.side-pane');
+  
+  toggleMenu.addEventListener("click", function () {
+    sidepane.classList.toggle("show-sidepane");
+  });
+});

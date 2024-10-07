@@ -788,8 +788,9 @@ input[type="checkbox"]:checked::before {
   display: none;
 }
 
-.edit-task-modal-docked, .edit-task-modal-float {
-  width: clamp(380px, 40vw, 900px);
+.edit-task-modal {
+  /* width: clamp(380px, 40vw, 900px); */
+  width: clamp(360px, 40vw, 900px);
   min-height: 180px;
   max-height: 480px;
   background-color: var( --main-tabs-color);
@@ -802,7 +803,7 @@ input[type="checkbox"]:checked::before {
   flex-wrap: wrap;
 }
 
-.edit-task-modal-docked {
+.edit-task-modal {
   align-self: end;
 }
 
@@ -1017,10 +1018,8 @@ input[type="checkbox"]:checked::before {
     background-color: var(--light-grey-color);
     transform: none;
   }
-  .edit-task-modal-docked {
-    display: none;
-  }
-  .edit-task-modal-float {
+  .edit-task-modal {
+    align-self: center;
     border: 1px solid var(--mid-purple-color);
     box-shadow: none;
   }
@@ -1084,7 +1083,7 @@ input[type="checkbox"]:checked::before {
     cursor: pointer;
   }
   .blur-filter {
-    padding-left: max(60px, calc(100vw / 14));
+    padding: 0 min(60px, calc(100vw / 14));
   }
   .diffuse-circle {
     width: 30vw;
