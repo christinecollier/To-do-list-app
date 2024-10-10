@@ -2,7 +2,7 @@
 A productivity web app that allows the user to create and manage their tasks. The user can add details for each task (a description, priority, and deadline), and can make changes to and delete existing tasks. 
 <br>
 
-**Highlights**:
+## Highlights:
 
 - Responsive                         | CSS grids, flexbox, and media queries 
 - Dynamic and interactive            | JavaScript to modify the DOM
