@@ -160,6 +160,7 @@ function editTitle(index) {
   saveBtn.style.display = 'flex';
   const deleteBtn = document.querySelector('.delete-button');
   deleteBtn.style.marginLeft = '0';
+  console.log('up to here is okay');
 
   newTitleContainer.addEventListener('blur', function () {
     newTitleContainer.style.border = 'none';
@@ -168,11 +169,14 @@ function editTitle(index) {
       saveButton.addEventListener('click', function () {
         const updatedTitle = newTitleContainer.value.trim();
         if (updatedTitle) {
-          todo[index]['task-title'] === updatedTitle;
+          todo[index]['task-title'] = updatedTitle;
           saveToLocalStorage();
+          console.log('if executed');
         } else {
           newTitleContainer.value =  existingTitleText;
+          console.log('else executed');
         }
+        console.log('finished');
         saveToLocalStorage();
         displayTasks();
         exitModal();
