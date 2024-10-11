@@ -150,7 +150,7 @@ function editTitle(index) {
   const newTitleContainer = document.createElement('input');
   newTitleContainer.setAttribute('class', 'new-task-title');
   newTitleContainer.maxLength = 40;
-  newTitleContainer.value =  existingTitleText;
+  newTitleContainer.value = existingTitleText;
 
   existingTitleCheckContainer.replaceChild(newTitleContainer, existingTitleContainer);
   todo[index]['task-title'] = newTitleContainer.value;
@@ -175,7 +175,7 @@ function editTitle(index) {
         }
         saveToLocalStorage();
         displayTasks();
-        viewTask();
+        exitModal();
       });
     }
     if (newTitleContainer.value === "") {
@@ -241,7 +241,7 @@ function saveToLocalStorage() {
 function exitModal() {
   let gridContainer = document.querySelector('.grid-container');
   let leftContainer = document.querySelector('.left-container');
-  let modalDocked = document.querySelector('.edit-task-modal-docked');
+  let modalDocked = document.querySelector('.edit-task-modal');
   let blurFilter = document.querySelector('.blur-filter');
 
   leftContainer.contains(modalDocked) ? leftContainer.removeChild(modalDocked) : '';
